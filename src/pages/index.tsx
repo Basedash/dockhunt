@@ -5,7 +5,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { api } from "../utils/api";
 
 const Home: NextPage = () => {
-  const apps = api.apps.getAll.useQuery();
+  const featuredDocks = api.docks.getFeatured.useQuery();
 
   return (
     <>
@@ -14,16 +14,26 @@ const Home: NextPage = () => {
         <meta name="description" content="Visualize people's Mac docks" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
+      <main className="flex min-h-screen flex-col items-center justify-center bg-black text-white">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
+          <h1 className="text-5xl font-extrabold sm:text-[5rem]">
             Dockhunt ⚓︎
           </h1>
-          <ul className="bg-white">
-            {apps.data
-              ? apps.data.map((app) => (
-                  <li key={app.name}>
-                    <Link href={`/apps/${app.name}`}>{app.name}</Link>
+          <ul>
+            {featuredDocks.data
+              ? featuredDocks.data.map((dock) => (
+                  <li key={dock.id}>
+                    <h2>{dock.user.name}</h2>
+                    <div className="flex gap-12">
+                      {dock.dockItems.map((dockItem) => (
+                        <Link
+                          key={dockItem.id}
+                          href={`/apps/${dockItem.app.name}`}
+                        >
+                          {dockItem.app.name}
+                        </Link>
+                      ))}
+                    </div>
                   </li>
                 ))
               : "Loading..."}
@@ -31,7 +41,12 @@ const Home: NextPage = () => {
           <div className="flex flex-col items-center gap-2">
             <AuthShowcase />
           </div>
-          <Link href={'/new-dock?app=Notion&app=Slack&app=Basedash'} className={'bg-orange-400'}>Create new dock</Link>
+          <Link
+            href={"/new-dock?app=Notion&app=Slack&app=Basedash"}
+            className={"bg-orange-400"}
+          >
+            Create new dock
+          </Link>
         </div>
       </main>
     </>
@@ -50,7 +65,9 @@ const AuthShowcase: React.FC = () => {
       </p>
       <button
         className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-        onClick={sessionData ? () => void signOut() : () => void signIn('twitter')}
+        onClick={
+          sessionData ? () => void signOut() : () => void signIn("twitter")
+        }
       >
         {sessionData ? "Sign out" : "Sign in"}
       </button>
