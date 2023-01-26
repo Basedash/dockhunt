@@ -1,15 +1,38 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
-import TwitterProvider from "next-auth/providers/twitter";
+import TwitterProvider, { TwitterLegacy, TwitterLegacyProfile } from "next-auth/providers/twitter";
 // Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 import { env } from "../../../env/server.mjs";
 import { prisma } from "../../../server/db";
+import { CallbacksOptions } from "next-auth/core/types";
 
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
+    jwt({token, user, account, profile, isNewUser, ...rest}) {
+      console.log('rest', rest);
+      console.log('user', token, user, account, profile, isNewUser);
+      if (profile) {
+          token['userProfile'] = {
+              // @ts-ignore
+              followersCount: profile.followers_count,
+              // @ts-ignore
+              twitterHandle: profile.screen_name,
+              // @ts-ignore
+              userID: profile.id
+          };
+      }
+      if (account) {
+          token['credentials'] = {
+              authToken: account.oauth_token,
+              authSecret: account.oauth_token_secret,
+          }
+      }
+      return token
+  },
     session({ session, user }) {
+      console.log('user', user);
       if (session.user) {
         session.user.id = user.id;
       }
