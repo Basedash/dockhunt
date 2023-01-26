@@ -35,7 +35,18 @@ const Home: NextPage = () => {
                             key={dockItem.id}
                             href={`/apps/${dockItem.app.name}`}
                           >
-                            {dockItem.app.name}
+                            {/* TODO: Switch to next/image once we're storing icons in our own bucket */}
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={
+                                dockItem.app.iconUrl ??
+                                "https://www.pngkit.com/png/detail/103-1038731_ios-icon-icons-png-free-and-downloads-ios.png"
+                              }
+                              alt={`${dockItem.app.name} app icon`}
+                              width="100"
+                              height="100"
+                              title={dockItem.app.name}
+                            />
                           </Link>
                         ))}
                       </div>
