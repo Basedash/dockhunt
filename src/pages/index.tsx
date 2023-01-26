@@ -55,6 +55,7 @@ const Home: NextPage = () => {
           <div className="flex flex-col items-center gap-2">
             <AuthShowcase />
           </div>
+          <Link href={'/new-dock?app=Notion&app=Slack&app=Basedash'} className={'bg-orange-400'}>Create new dock</Link>
         </div>
       </main>
     </>
