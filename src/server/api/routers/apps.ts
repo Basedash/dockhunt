@@ -10,4 +10,14 @@ export const appsRouter = createTRPCRouter({
   getAll: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.app.findMany();
   }),
+  getManyFromNames: publicProcedure.input(z.object({names: z.array(z.string())})).query(({ ctx, input }) => {
+    const names = input.names;
+    return ctx.prisma.app.findMany({
+      where: {
+        name: {
+          in: names,
+        },
+      },
+    });
+  })
 });
