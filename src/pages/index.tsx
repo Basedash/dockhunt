@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { api } from "../utils/api";
+import format from "date-fns/format";
 
 const Home: NextPage = () => {
   const featuredDocks = api.docks.getFeatured.useQuery();
@@ -19,25 +20,30 @@ const Home: NextPage = () => {
           <h1 className="text-5xl font-extrabold sm:text-[5rem]">
             Dockhunt ⚓︎
           </h1>
-          <ul>
+          <div className="flex gap-12">
             {featuredDocks.data
               ? featuredDocks.data.map((dock) => (
-                  <li key={dock.id}>
-                    <h2>{dock.user.name}</h2>
-                    <div className="flex gap-12">
-                      {dock.dockItems.map((dockItem) => (
-                        <Link
-                          key={dockItem.id}
-                          href={`/apps/${dockItem.app.name}`}
-                        >
-                          {dockItem.app.name}
-                        </Link>
-                      ))}
+                  <div key={dock.id}>
+                    <p className="text-gray-600">
+                      {format(dock.createdAt, "yyyy mm dd")}
+                    </p>
+                    <p className="text-gray-600">{dock.user.name}</p>
+                    <div className="flex gap-12 rounded-xl border border-solid border-gray-700 p-8">
+                      <div className="flex gap-12 rounded-xl border border-solid border-gray-700 p-8">
+                        {dock.dockItems.map((dockItem) => (
+                          <Link
+                            key={dockItem.id}
+                            href={`/apps/${dockItem.app.name}`}
+                          >
+                            {dockItem.app.name}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
-                  </li>
+                  </div>
                 ))
               : "Loading..."}
-          </ul>
+          </div>
           <div className="flex flex-col items-center gap-2">
             <AuthShowcase />
           </div>
