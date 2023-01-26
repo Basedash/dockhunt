@@ -1,36 +1,15 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
-import TwitterProvider, { TwitterLegacy, TwitterLegacyProfile } from "next-auth/providers/twitter";
+import type { TwitterProfile } from "next-auth/providers/twitter";
+import TwitterProvider from "next-auth/providers/twitter";
 // Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 import { env } from "../../../env/server.mjs";
 import { prisma } from "../../../server/db";
-import { CallbacksOptions } from "next-auth/core/types";
 
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
-    jwt({token, user, account, profile, isNewUser, ...rest}) {
-      console.log('rest', rest);
-      console.log('user', token, user, account, profile, isNewUser);
-      if (profile) {
-          token['userProfile'] = {
-              // @ts-ignore
-              followersCount: profile.followers_count,
-              // @ts-ignore
-              twitterHandle: profile.screen_name,
-              // @ts-ignore
-              userID: profile.id
-          };
-      }
-      if (account) {
-          token['credentials'] = {
-              authToken: account.oauth_token,
-              authSecret: account.oauth_token_secret,
-          }
-      }
-      return token
-  },
     session({ session, user }) {
       console.log('user', user);
       if (session.user) {
@@ -46,6 +25,22 @@ export const authOptions: NextAuthOptions = {
       clientId: env.TWITTER_CLIENT_ID,
       clientSecret: env.TWITTER_CLIENT_SECRET,
       version: "2.0",
+      userinfo: {
+        url: "https://api.twitter.com/2/users/me",
+        params: { "user.fields": "profile_image_url,public_metrics" },
+      },
+      profile(profile: {data: TwitterProfile['data'] & {profile_image_url: string; public_metrics: {followers_count: number}}}) {
+        return {
+          id: profile.data.id,
+          name: profile.data.name,
+          twitterFollowerCount: profile.data.public_metrics.followers_count,
+          twitterHandle: profile.data.username,
+          avatarUrl: profile.data.profile_image_url.replace(
+            /_normal\.(jpg|png|gif)$/,
+            ".$1"
+          ),
+        };
+      }
     })
     /**
      * ...add more providers here
