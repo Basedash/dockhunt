@@ -14,5 +14,15 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  images: {
+    remotePatterns: [
+      // Twitter profile images
+      {
+        protocol: "https",
+        hostname: "pbs.twimg.com",
+        pathname: "/profile_images/**",
+      },
+    ],
+  },
 };
 export default config;

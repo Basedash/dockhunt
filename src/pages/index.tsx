@@ -53,10 +53,15 @@ const Home: NextPage = () => {
             {featuredDocks.data
               ? featuredDocks.data.map((dock) => (
                   <div key={dock.id}>
-                    <p className="text-gray-600">
-                      {format(dock.createdAt, "yyyy mm dd")}
+                    <p className="text-sm text-gray-600">
+                      {format(dock.createdAt, "MMM d, y")}
                     </p>
-                    <p className="text-gray-600">{dock.user.name}</p>
+                    <Link
+                      href={`/users/${dock.user.username}`}
+                      className="text-gray-600"
+                    >
+                      {dock.user.name}
+                    </Link>
                     <div className="flex gap-12 rounded-xl border border-solid border-gray-700 p-8">
                       <Dock
                         apps={dock.dockItems.map((dockItem) => dockItem.app)}
@@ -85,19 +90,24 @@ export default Home;
 
 const AuthShowcase: React.FC = () => {
   const { data: sessionData } = useSession();
+  const user = api.users.getOne.useQuery({ id: sessionData?.user?.id ?? "" });
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       <p className="text-center text-2xl text-white">
-        {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
+        {user.data && (
+          <Link href={`/users/${user.data.username}`}>
+            Logged in as {user.data.name}
+          </Link>
+        )}
       </p>
       <button
         className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
         onClick={
-          sessionData ? () => void signOut() : () => void signIn("twitter")
+          user.data ? () => void signOut() : () => void signIn("twitter")
         }
       >
-        {sessionData ? "Sign out" : "Sign in"}
+        {user.data ? "Sign out" : "Sign in"}
       </button>
     </div>
   );
