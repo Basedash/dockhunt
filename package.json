@@ -20,6 +20,7 @@
     "@trpc/next": "^10.8.1",
     "@trpc/react-query": "^10.8.1",
     "@trpc/server": "^10.8.1",
+    "@vercel/og": "^0.0.27",
     "aws-sdk": "^2.1303.0",
     "date-fns": "^2.29.3",
     "formidable": "^2.1.1",
