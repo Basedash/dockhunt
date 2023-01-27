@@ -16,7 +16,7 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Dockhunt</title>
-        <meta name="description" content="Discover the apps people have in their docks" />
+        <meta name="description" content="Discover the apps everyone is docking about" />
       </Head>
       <div className="flex w-screen max-w-[80rem] flex-col gap-20 px-20 py-24">
         {featuredDocks.data
