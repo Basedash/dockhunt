@@ -64,14 +64,10 @@ const DockItem = ({ app }: { app: App }) => {
 
 export function Dock({ apps }: { apps: App[] }) {
   return (
-    <>
-      <div className="bg-[rgba(0, 0, 0, 0.3)] flex flex-col rounded-[15px] border border-gray-700">
-        <div className="flex">
-          {apps.map((app) => (
-            <DockItem key={app.name} app={app} />
-          ))}
-        </div>
-      </div>
-    </>
+    <div className="flex max-w-full overflow-x-scroll rounded-[22px] border border-gray-600/60 bg-gray-800/60 backdrop-blur">
+      {apps.map((app) => (
+        <DockItem key={app.name} app={app} />
+      ))}
+    </div>
   );
 }
