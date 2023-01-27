@@ -54,7 +54,7 @@ const DockItem = ({ app }: { app: App }) => {
           className={"absolute"}
           src={
             app.iconUrl ??
-            "https://www.pngkit.com/png/detail/103-1038731_ios-icon-icons-png-free-and-downloads-ios.png"
+            "https://dockhunt-images.nyc3.cdn.digitaloceanspaces.com/placeholder.png"
           }
         />
       </motion.div>
