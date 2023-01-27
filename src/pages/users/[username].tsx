@@ -18,6 +18,8 @@ export default function UserPage() {
         <title>
           {user.data ? `Dockhunt | ${user.data.username}` : "Dockhunt"}
         </title>
+        {/* TODO: Use an open graph image that will be generate "on the fly" for the users dock */}
+        {/*<meta name={'og:image'} content={'/public/opengraph.png'} key={'opengraph-image'} />*/}
       </Head>
       <main className="flex min-h-screen flex-col items-center bg-black text-white">
         {user.data ? (

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
@@ -13,6 +14,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
+      <Head>
+        <link rel="icon" href="/favicon.png" />
+        <meta name={'og:image'} content={'/opengraph.png'} key={'opengraph-image'} />
+      </Head>
       <main className="flex min-h-screen flex-col items-center bg-black text-white">
       <TopBar />
       <Component {...pageProps} />
