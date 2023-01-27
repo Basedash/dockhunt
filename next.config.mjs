@@ -22,6 +22,12 @@ const config = {
         hostname: "pbs.twimg.com",
         pathname: "/profile_images/**",
       },
+      // App icons in DigitalOcean bucket
+      {
+        protocol: "https",
+        hostname: "dockhunt-images.nyc3.cdn.digitaloceanspaces.com",
+        pathname: "/*",
+      },
     ],
   },
 };
