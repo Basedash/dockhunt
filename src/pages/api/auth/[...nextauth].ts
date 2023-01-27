@@ -28,19 +28,24 @@ export const authOptions: NextAuthOptions = {
         url: "https://api.twitter.com/2/users/me",
         params: { "user.fields": "profile_image_url,public_metrics" },
       },
-      profile(profile: {data: TwitterProfile['data'] & {profile_image_url: string; public_metrics: {followers_count: number}}}) {
+      profile(profile: {
+        data: TwitterProfile["data"] & {
+          profile_image_url: string;
+          public_metrics: { followers_count: number };
+        };
+      }) {
         return {
           id: profile.data.id,
           name: profile.data.name,
           twitterFollowerCount: profile.data.public_metrics.followers_count,
-          twitterHandle: profile.data.username,
+          username: profile.data.username,
           avatarUrl: profile.data.profile_image_url.replace(
             /_normal\.(jpg|png|gif)$/,
             ".$1"
           ),
         };
-      }
-    })
+      },
+    }),
     /**
      * ...add more providers here
      *
