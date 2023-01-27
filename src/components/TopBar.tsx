@@ -30,13 +30,15 @@ export const TopBar = () => {
       <AuthShowcase />
     </div>
     <h1 className="text-5xl font-extrabold sm:text-[5rem] pt-4">
-      <Image
-        src={imgSrc}
-        alt="Dockhunt logo"
-        width={120}
-        height={120}
-        onMouseEnter={cycleImage}
-      />
+      <Link href="/">
+        <Image
+          src={imgSrc}
+          alt="Dockhunt logo"
+          width={120}
+          height={120}
+          onMouseEnter={cycleImage}
+        />
+      </Link>
     </h1>
     <div className={"absolute right-4 top-4 flex"}>
       <Link
