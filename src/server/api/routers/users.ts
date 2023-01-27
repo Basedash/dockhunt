@@ -16,6 +16,7 @@ export const usersRouter = createTRPCRouter({
         select: {
           username: true,
           name: true,
+          description: true,
           avatarUrl: true,
         },
       });
