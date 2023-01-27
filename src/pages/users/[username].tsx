@@ -19,31 +19,37 @@ export default function UserPage() {
         <title>
           {user.data ? `Dockhunt | ${user.data.username}` : "Dockhunt"}
         </title>
-        <meta name={'og:image'} content={`${env.NEXT_PUBLIC_URL}/api/og?username=${username}`} key={'opengraph-image'} />
+        <meta
+          name={"og:image"}
+          content={`${env.NEXT_PUBLIC_URL}/api/og?username=${username}`}
+          key={"opengraph-image"}
+        />
       </Head>
-      <main className="flex h-screen w-screen flex-col items-center bg-mojave bg-cover text-white">
+      <div className="flex h-screen w-screen flex-col items-center justify-center bg-mojave bg-cover">
         {user.data ? (
           <>
-            {user.data.avatarUrl && (
-              <Image
-                src={user.data.avatarUrl}
-                alt={`${user.data.name} avatar`}
-                className="mt-60 rounded-full"
-                width="150"
-                height="150"
-              />
-            )}
-            <h1 className="mt-2 text-[40px] font-black">{user.data.name}</h1>
-            <p className="mt-3 text-gray-400">{user.data.description}</p>
-            <div className="mt-2 flex gap-4">
-              <a
-                className="text-gray-400 hover:underline"
-                href={`https://twitter.com/${username}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                @{username}
-              </a>
+            <div className="flex flex-col items-center pb-20">
+              {user.data.avatarUrl && (
+                <Image
+                  src={user.data.avatarUrl}
+                  alt={`${user.data.name} avatar`}
+                  className="rounded-full"
+                  width="150"
+                  height="150"
+                />
+              )}
+              <h1 className="mt-2 text-2xl">{user.data.name}</h1>
+              <p className="mt-3 text-gray-300">{user.data.description}</p>
+              <div className="mt-2 flex gap-4">
+                <a
+                  className="text-gray-300 hover:underline"
+                  href={`https://twitter.com/${username}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  @{username}
+                </a>
+              </div>
             </div>
 
             <div className="absolute bottom-10">
@@ -59,7 +65,7 @@ export default function UserPage() {
         ) : (
           <span>Loading...</span>
         )}
-      </main>
+      </div>
     </>
   );
 }

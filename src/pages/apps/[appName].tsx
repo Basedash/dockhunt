@@ -18,7 +18,7 @@ export default function AppPage() {
       <Head>
         <title>{app.data ? `Dockhunt | ${app.data.name}` : "Dockhunt"}</title>
       </Head>
-      <main className="flex min-h-screen flex-col items-center bg-black text-white">
+      <div className="flex flex-col items-center">
         {app.data ? (
           <>
             {app.data.iconUrl && (
@@ -31,11 +31,11 @@ export default function AppPage() {
               />
             )}
             <h1 className="mt-2 text-[40px] font-black">{app.data.name}</h1>
-            <p className="mt-3 text-gray-400">{app.data.description}</p>
+            <p className="mt-3 text-gray-300">{app.data.description}</p>
             <div className="mt-2 flex gap-4">
               {app.data.websiteUrl && (
                 <a
-                  className="text-gray-400 hover:underline"
+                  className="text-gray-300 hover:underline"
                   href={app.data.websiteUrl}
                   target="_blank"
                   rel="noreferrer"
@@ -45,7 +45,7 @@ export default function AppPage() {
               )}
               {app.data.twitterUrl && (
                 <a
-                  className="text-gray-400 hover:underline"
+                  className="text-gray-300 hover:underline"
                   href={app.data.twitterUrl}
                   target="_blank"
                   rel="noreferrer"
@@ -58,7 +58,7 @@ export default function AppPage() {
         ) : (
           <span>Loading...</span>
         )}
-      </main>
+      </div>
     </>
   );
 }

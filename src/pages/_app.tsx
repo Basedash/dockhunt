@@ -2,8 +2,7 @@ import Head from "next/head";
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import Script from 'next/script'
-
+import Script from "next/script";
 
 import { api } from "../utils/api";
 
@@ -16,14 +15,21 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <Script src={'https://cdn.usefathom.com/script.js'} data-site="ZBAJAOGI" />
+      <Script
+        src={"https://cdn.usefathom.com/script.js"}
+        data-site="ZBAJAOGI"
+      />
       <Head>
         <link rel="icon" href="/favicon.png" />
-        <meta name={'og:image'} content={'/opengraph.png'} key={'opengraph-image'} />
+        <meta
+          name={"og:image"}
+          content={"/opengraph.png"}
+          key={"opengraph-image"}
+        />
       </Head>
-      <main className="flex min-h-screen flex-col items-center bg-black text-white">
-      <TopBar />
-      <Component {...pageProps} />
+      <main className="flex min-h-screen flex-col items-center bg-neutral-900 text-white">
+        <TopBar />
+        <Component {...pageProps} />
       </main>
     </SessionProvider>
   );

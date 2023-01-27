@@ -26,10 +26,16 @@ const Home: NextPage = () => {
           ? featuredDocks.data.map((dock) => (
               <div key={dock.id} className={"flex flex-col"}>
                 <p className="mb-2 text-sm text-gray-600">
-                  {format(dock.createdAt, "MMM d, y")}
+                  <a
+                    className="hover:underline"
+                    href={`https://twitter.com/${dock.user.username}`}
+                  >
+                    @{dock.user.username}
+                  </a>{" "}
+                  &sdot; {format(dock.createdAt, "MMM d, y")}
                 </p>
                 <div
-                  className={`relative flex justify-center gap-12 rounded-3xl border border-solid border-gray-700 bg-mojave bg-cover bg-center px-12 pt-40 pb-6 opacity-50 transition-opacity duration-300 ease-in-out hover:opacity-100`}
+                  className={`relative flex justify-center gap-12 rounded-3xl border border-solid border-gray-600/60 bg-mojave bg-cover bg-center px-12 pt-40 pb-6 opacity-60 transition-opacity duration-300 ease-in-out hover:opacity-100`}
                 >
                   <Link
                     href={`/users/${dock.user.username}`}

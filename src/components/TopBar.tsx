@@ -19,9 +19,9 @@ export const TopBar = () => {
   }, []);
 
   return (
-    <div className="fixed z-10 flex w-full items-center justify-between bg-gray-800/30 px-4 py-1 backdrop-blur-3xl">
+    <div className="fixed z-10 flex w-full items-center justify-between bg-gray-800/30 px-4 py-1 text-sm backdrop-blur-3xl">
       <div className="flex items-center gap-4">
-        <Link className="flex gap-2 font-medium" href="/">
+        <Link className="flex gap-4 font-bold" href="/">
           <Image src={logo} alt="Dockhunt" height="16" />
           Dockhunt
         </Link>
@@ -38,7 +38,9 @@ export const TopBar = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        <Link href="https://www.basedash.com">Made by Basedash</Link>
+        <a href="https://www.basedash.com" target="_blank" rel="noreferrer">
+          Made by Basedash
+        </a>
         <div className="tabular-nums">{format(date, "eee MMM d p")}</div>
         {sessionData && sessionData.user && (
           <Link href={`/users/${sessionData.user.username}`}>
