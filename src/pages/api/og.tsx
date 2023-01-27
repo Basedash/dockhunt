@@ -68,8 +68,10 @@ export default function handler(req: NextRequest) {
         height: 630,
       },
     );
-  } catch (e: any) {
-    console.log(`${e.message}`);
+  } catch (e) {
+    if (e instanceof Error) {
+      console.log(`${e.message}`);
+    }
     return new Response(`Failed to generate the image`, {
       status: 500,
     });
