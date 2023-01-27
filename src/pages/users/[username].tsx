@@ -1,3 +1,4 @@
+import { Dock } from "components/Dock";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -41,6 +42,16 @@ export default function UserPage() {
               >
                 @{username}
               </a>
+            </div>
+
+            <div className="mt-10">
+              {user.data.dock && (
+                <Dock
+                  apps={user.data.dock.dockItems.map(
+                    (dockItem) => dockItem.app
+                  )}
+                />
+              )}
             </div>
           </>
         ) : (

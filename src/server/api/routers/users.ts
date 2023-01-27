@@ -18,6 +18,15 @@ export const usersRouter = createTRPCRouter({
           name: true,
           description: true,
           avatarUrl: true,
+          dock: {
+            include: {
+              dockItems: {
+                include: {
+                  app: true,
+                },
+              },
+            },
+          },
         },
       });
     }),

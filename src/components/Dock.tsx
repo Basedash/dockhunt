@@ -65,7 +65,7 @@ const DockItem = ({ app }: { app: App }) => {
 export function Dock({ apps }: { apps: App[] }) {
   return (
     <>
-      <div className="bg-[rgba(0, 0, 0, 0.3)] flex flex-col rounded-[15px] border border-white">
+      <div className="bg-[rgba(0, 0, 0, 0.3)] flex flex-col rounded-[15px] border border-gray-700">
         <div className="flex">
           {apps.map((app) => (
             <DockItem key={app.name} app={app} />
