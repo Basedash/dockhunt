@@ -1,5 +1,5 @@
+import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { api } from "../../utils/api";
 
@@ -12,25 +12,41 @@ export default function UserPage() {
   const user = api.users.getOne.useQuery({ username: username });
 
   return (
-    <div>
-      {user.data ? (
-        <>
-          <p>{user.data.name}</p>
-          <Link href={`https://twitter.com/${user.data.username}`}>
-            {user.data.username}
-          </Link>
-          {user.data.avatarUrl && (
-            <Image
-              src={user.data.avatarUrl}
-              alt={`${user.data.name} avatar`}
-              width="100"
-              height="100"
-            />
-          )}
-        </>
-      ) : (
-        <span>Loading...</span>
-      )}
-    </div>
+    <>
+      <Head>
+        <title>
+          {user.data ? `Dockhunt | ${user.data.username}` : "Dockhunt"}
+        </title>
+      </Head>
+      <main className="flex min-h-screen flex-col items-center bg-black text-white">
+        {user.data ? (
+          <>
+            {user.data.avatarUrl && (
+              <Image
+                src={user.data.avatarUrl}
+                alt={`${user.data.name} avatar`}
+                className="mt-20 rounded-full"
+                width="150"
+                height="150"
+              />
+            )}
+            <h1 className="mt-2 text-[40px] font-black">{user.data.name}</h1>
+            <p className="mt-3 text-gray-400">{user.data.description}</p>
+            <div className="mt-2 flex gap-4">
+              <a
+                className="text-gray-400 hover:underline"
+                href={`https://twitter.com/${username}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                @{username}
+              </a>
+            </div>
+          </>
+        ) : (
+          <span>Loading...</span>
+        )}
+      </main>
+    </>
   );
 }

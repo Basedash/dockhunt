@@ -39,6 +39,7 @@ export const authOptions: NextAuthOptions = {
         return {
           id: profile.data.id,
           name: profile.data.name,
+          description: profile.data.description,
           twitterFollowerCount: profile.data.public_metrics.followers_count,
           username: profile.data.username,
           avatarUrl: profile.data.profile_image_url.replace(

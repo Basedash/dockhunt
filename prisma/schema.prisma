@@ -70,6 +70,7 @@ model User {
     id                   String    @id @default(cuid())
     username             String    @unique // From Twitter
     name                 String // From Twitter
+    description          String? // From Twitter
     accounts             Account[]
     sessions             Session[]
     email                String?   @unique

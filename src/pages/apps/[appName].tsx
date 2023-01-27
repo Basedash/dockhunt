@@ -35,7 +35,7 @@ export default function AppPage() {
             <div className="mt-2 flex gap-4">
               {app.data.websiteUrl && (
                 <a
-                  className="hover:underline"
+                  className="text-gray-400 hover:underline"
                   href={app.data.websiteUrl}
                   target="_blank"
                   rel="noreferrer"
@@ -45,7 +45,7 @@ export default function AppPage() {
               )}
               {app.data.twitterUrl && (
                 <a
-                  className="hover:underline"
+                  className="text-gray-400 hover:underline"
                   href={app.data.twitterUrl}
                   target="_blank"
                   rel="noreferrer"
