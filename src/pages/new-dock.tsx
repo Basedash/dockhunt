@@ -1,13 +1,10 @@
-<<<<<<< Updated upstream
-=======
 import type { App } from "@prisma/client";
->>>>>>> Stashed changes
 import { useRouter } from "next/router";
 import { api } from "../utils/api";
 import { Dock } from "../components/Dock";
 import Head from "next/head";
 import { signIn, useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { unstable_getServerSession } from "next-auth";
 import { GetServerSidePropsContext } from "next";
@@ -43,23 +40,12 @@ const NewDock = () => {
         <meta name="description" content="Save your dock" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-<<<<<<< Updated upstream
-      <main
-        className={
-          "flex min-h-screen flex-col items-center justify-center bg-black text-white"
-        }
-      >
-        <h1 className={"mb-4 text-xl"}>New dock page</h1>
-        <Dock apps={orderedApps} />
-      </main>
-=======
       {session && (
         <main className={'flex min-h-screen flex-col items-center justify-center bg-black text-white'}>
           <h1 className={"mb-4 text-xl"}>New dock page</h1>
           <Dock apps={orderedApps} />
         </main>
       )}
->>>>>>> Stashed changes
     </>
   );
 };
