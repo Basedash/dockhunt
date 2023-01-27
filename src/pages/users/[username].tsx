@@ -21,14 +21,14 @@ export default function UserPage() {
         {/* TODO: Use an open graph image that will be generate "on the fly" for the users dock */}
         {/*<meta name={'og:image'} content={'/public/opengraph.png'} key={'opengraph-image'} />*/}
       </Head>
-      <main className="flex min-h-screen flex-col items-center bg-black text-white">
+      <main className="flex h-screen w-screen flex-col items-center bg-mojave bg-cover text-white">
         {user.data ? (
           <>
             {user.data.avatarUrl && (
               <Image
                 src={user.data.avatarUrl}
                 alt={`${user.data.name} avatar`}
-                className="mt-20 rounded-full"
+                className="mt-60 rounded-full"
                 width="150"
                 height="150"
               />
@@ -46,7 +46,7 @@ export default function UserPage() {
               </a>
             </div>
 
-            <div className="mt-10">
+            <div className="absolute bottom-10">
               {user.data.dock && (
                 <Dock
                   apps={user.data.dock.dockItems.map(

@@ -13,7 +13,7 @@ const images = [
   dockhuntDarkMojave,
   dockhuntDarkVentura,
   dockhuntLightBigSur,
-  dockhuntLightVentura
+  dockhuntLightVentura,
 ];
 
 export const TopBar = () => {
@@ -25,30 +25,36 @@ export const TopBar = () => {
     setImgSrc(images[nextIndex]!);
   };
 
-  return (<div className={"relative w-full flex items-start pt-4 px-4 justify-center"}>
-    <div className={"absolute left-4 top-4"}>
-      <AuthShowcase />
+  return (
+    <div
+      className={"fixed z-10 flex w-full items-start justify-center px-4 pt-4"}
+    >
+      <div className={"absolute left-4 top-4"}>
+        <AuthShowcase />
+      </div>
+      <h1 className="pt-4 text-5xl font-extrabold sm:text-[5rem]">
+        <Link href="/">
+          <Image
+            src={imgSrc}
+            alt="Dockhunt logo"
+            width={120}
+            height={120}
+            onMouseEnter={cycleImage}
+          />
+        </Link>
+      </h1>
+      <div className={"absolute right-4 top-4 flex"}>
+        <Link
+          href={"/new-dock?app=Notion&app=Slack&app=Basedash"}
+          className={
+            "rounded-full bg-cyan-300 px-8 py-2 font-semibold text-black transition hover:bg-cyan-200"
+          }
+        >
+          Add your dock
+        </Link>
+      </div>
     </div>
-    <h1 className="text-5xl font-extrabold sm:text-[5rem] pt-4">
-      <Link href="/">
-        <Image
-          src={imgSrc}
-          alt="Dockhunt logo"
-          width={120}
-          height={120}
-          onMouseEnter={cycleImage}
-        />
-      </Link>
-    </h1>
-    <div className={"absolute right-4 top-4 flex"}>
-      <Link
-        href={"/new-dock?app=Notion&app=Slack&app=Basedash"}
-        className={"bg-cyan-300 rounded-full px-8 py-2 font-semibold text-black transition hover:bg-cyan-200"}
-      >
-        Add your dock
-      </Link>
-    </div>
-  </div>);
+  );
 };
 
 const AuthShowcase: React.FC = () => {
@@ -69,9 +75,11 @@ const AuthShowcase: React.FC = () => {
         </Link>
       )}
       <button
-        className="rounded-full bg-white/10 py-1 p-3 font-semibold text-white no-underline transition hover:bg-white/20"
+        className="rounded-full bg-white/10 p-3 py-1 font-semibold text-white no-underline transition hover:bg-white/20"
         onClick={
-          sessionData ? () => void signOut({redirect: false}) : () => void signIn("twitter")
+          sessionData
+            ? () => void signOut({ redirect: false })
+            : () => void signIn("twitter")
         }
       >
         {sessionData ? "Sign out" : "Sign in"}
