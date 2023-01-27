@@ -5,7 +5,7 @@ export const config = {
   runtime: 'experimental-edge',
 };
 
-export default async function handler(req: NextRequest, res: NextApiResponse) {
+export default function handler(req: NextRequest, res: NextApiResponse) {
   try {
     const { searchParams } = new URL(req.url);
 
