@@ -16,6 +16,7 @@ export const docksRouter = createTRPCRouter({
           include: {
             app: true,
           },
+          orderBy: { position: "asc" },
         },
       },
     });
