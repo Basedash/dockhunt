@@ -19,30 +19,34 @@ const Home: NextPage = () => {
         <meta name="description" content="Visualize people's Mac docks" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <div className="flex flex-col gap-12 pt-24">
+      <div className="flex w-screen max-w-[80rem] flex-col gap-20 px-20 py-24">
         {featuredDocks.data
           ? featuredDocks.data.map((dock) => (
-            <div key={dock.id} className={"flex flex-col"}>
-              <p className="text-sm text-gray-600 mb-2">
-                {format(dock.createdAt, "MMM d, y")}
-              </p>
-              <div
-                className="flex gap-12 rounded-xl border border-solid border-gray-700 pt-32 pb-6 justify-center px-12 relative">
-                <Link
-                  href={`/users/${dock.user.username}`}
-                  className="text-gray-600 absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2"
+              <div key={dock.id} className={"flex flex-col"}>
+                <p className="mb-2 text-sm text-gray-600">
+                  {format(dock.createdAt, "MMM d, y")}
+                </p>
+                <div
+                  className={`relative flex justify-center gap-12 rounded-3xl border border-solid border-gray-700 bg-mojave bg-cover bg-center px-12 pt-40 pb-6`}
                 >
-                  {/* TODO: Use placeholder image for null values */}
-                  {/* TODO: On hover show tooltip of name */}
-                  <Image src={dock.user.avatarUrl ?? ""} alt={`${dock.user.name}'s avatar`} width={80} height={80}
-                         className={"rounded-full"} />
-                </Link>
-                <Dock
-                  apps={dock.dockItems.map((dockItem) => dockItem.app)}
-                />
+                  <Link
+                    href={`/users/${dock.user.username}`}
+                    className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 text-gray-600"
+                  >
+                    {/* TODO: Use placeholder image for null values */}
+                    {/* TODO: On hover show tooltip of name */}
+                    <Image
+                      src={dock.user.avatarUrl ?? ""}
+                      alt={`${dock.user.name}'s avatar`}
+                      width={80}
+                      height={80}
+                      className={"rounded-full"}
+                    />
+                  </Link>
+                  <Dock apps={dock.dockItems.map((dockItem) => dockItem.app)} />
+                </div>
               </div>
-            </div>
-          ))
+            ))
           : "Loading..."}
       </div>
     </>
@@ -64,7 +68,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
   return {
     props: {
-      session
-    }
+      session,
+    },
   };
 }
