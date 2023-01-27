@@ -1,5 +1,4 @@
 import { ImageResponse } from '@vercel/og';
-import { env } from "env/server.mjs";
 import { NextRequest } from 'next/server';
 
 export const config = {
@@ -19,7 +18,7 @@ export default function handler(req: NextRequest) {
       (
         <div
           style={{
-            backgroundImage: `url("${env.NEXTAUTH_URL}/og-wallpaper.jpg")`,
+            // backgroundImage: `url("${env.NEXTAUTH_URL}/og-wallpaper.jpg")`,
             backgroundSize: 'cover',
             width: '1200px',
             height: '630px',
