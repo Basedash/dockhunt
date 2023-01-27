@@ -36,29 +36,27 @@ export default function handler(req: NextRequest, res: NextApiResponse) {
               alignItems: 'center',
               justifyContent: 'center',
               justifyItems: 'center',
+              marginBottom: '16px'
             }}
           >
-            <img
-              alt="Vercel"
-              height={200}
-              src="data:image/svg+xml,%3Csvg width='116' height='100' fill='black' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M57.5 0L115 100H0L57.5 0z' /%3E%3C/svg%3E"
-              style={{ margin: '0 30px' }}
-              width={232}
-            />
+            <img src={`${process.env.NEXTAUTH_URL as string}/og-dockhunt.png`} height={126} width={126} />
           </div>
           <div
             style={{
-              fontSize: 60,
+              fontSize: 52,
               fontStyle: 'normal',
               letterSpacing: '-0.025em',
               color: 'white',
               marginTop: 30,
-              padding: '0 120px',
+              padding: '0 60px',
               lineHeight: 1.4,
               whiteSpace: 'pre-wrap',
+              border: '1px solid rgba(75,85,99,.6)',
+              backgroundColor: 'rgba(31,41,55,.6)',
+              borderRadius: '15px',
             }}
           >
-            {username}
+            {`Checkout ${username}'s dock`}
           </div>
         </div>
       ),
