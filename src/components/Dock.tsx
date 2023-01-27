@@ -1,16 +1,7 @@
 import { motion } from "framer-motion";
+import type { App } from "@prisma/client";
 
-// .dockWrapper {
-//   background: rgba(0, 0, 0, 0.3);
-//   display: flex;
-//   border-radius: 15px;
-// }
-//
-// .dockItem img {
-//   position: absolute;
-// }
-
-const DockItem = ({ imgUrl }: { imgUrl: string }) => {
+const DockItem = ({ app }: { app: App }) => {
   const variants = {
     hover: {
       width: 68,
@@ -24,6 +15,7 @@ const DockItem = ({ imgUrl }: { imgUrl: string }) => {
 
   return (
     <motion.div
+      // href={`/apps/${dockItem.app.name}`}
       variants={variants}
       whileHover="hover"
       initial="initial"
@@ -35,6 +27,7 @@ const DockItem = ({ imgUrl }: { imgUrl: string }) => {
         mass: 1
       }}
     >
+      {/* TODO: Switch to next/image once we're storing icons in our own bucket. Might be tricky with framer motion though. */}
       <motion.img
         variants={{
           hover: {
@@ -53,39 +46,26 @@ const DockItem = ({ imgUrl }: { imgUrl: string }) => {
           stiffness: 500,
           mass: 1
         }}
+        alt={`${app.name} app icon`}
+        title={app.name}
         whileHover="hover"
         initial="initial"
-        src={imgUrl}
+        className={'absolute'}
+        src={app.iconUrl ?? "https://www.pngkit.com/png/detail/103-1038731_ios-icon-icons-png-free-and-downloads-ios.png"}
       />
     </motion.div>
   );
 };
 
-export default function Dock() {
+export function Dock({apps}: {apps: App[]}) {
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col bg-[rgba(0, 0, 0, 0.3)] border rounded-[15px] border-white">
         <div className="flex">
-          <DockItem
-            imgUrl={
-              "https://framerusercontent.com/images/BlM83ttV352m9OYNO6L6O673EM.png"
-            }
-          />
-          <DockItem
-            imgUrl={
-              "https://framerusercontent.com/images/3NeRl8GGzIb7qC2keBcx7u1kk.png"
-            }
-          />
-          <DockItem
-            imgUrl={
-              "https://framerusercontent.com/images/yuLavRmYDK2h6MHnOY1Pgjn8cc.png"
-            }
-          />
-          <DockItem
-            imgUrl={
-              "https://framerusercontent.com/images/N0ZpXxdw6YgnX4Y1db8EvAZEo.png"
-            }
-          />
+          {apps.map((app) => (<DockItem
+            key={app.name}
+            app={app}
+          />))}
         </div>
       </div>
     </>

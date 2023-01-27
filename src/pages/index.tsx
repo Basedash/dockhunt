@@ -4,6 +4,7 @@ import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { api } from "../utils/api";
 import format from "date-fns/format";
+import { Dock } from "../components/Dock";
 
 const Home: NextPage = () => {
   const featuredDocks = api.docks.getFeatured.useQuery();
@@ -29,27 +30,7 @@ const Home: NextPage = () => {
                     </p>
                     <p className="text-gray-600">{dock.user.name}</p>
                     <div className="flex gap-12 rounded-xl border border-solid border-gray-700 p-8">
-                      <div className="flex gap-12 rounded-xl border border-solid border-gray-700 p-8">
-                        {dock.dockItems.map((dockItem) => (
-                          <Link
-                            key={dockItem.id}
-                            href={`/apps/${dockItem.app.name}`}
-                          >
-                            {/* TODO: Switch to next/image once we're storing icons in our own bucket */}
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              src={
-                                dockItem.app.iconUrl ??
-                                "https://www.pngkit.com/png/detail/103-1038731_ios-icon-icons-png-free-and-downloads-ios.png"
-                              }
-                              alt={`${dockItem.app.name} app icon`}
-                              width="100"
-                              height="100"
-                              title={dockItem.app.name}
-                            />
-                          </Link>
-                        ))}
-                      </div>
+                        <Dock apps={dock.dockItems.map((dockItem) => dockItem.app)} />
                     </div>
                   </div>
                 ))
