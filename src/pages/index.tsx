@@ -5,9 +5,31 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { api } from "../utils/api";
 import format from "date-fns/format";
 import { Dock } from "../components/Dock";
+import Image from 'next/image'
+import dockhuntDarkBigSur from '../images/Dockhunt-dark-bigsur.png';
+import dockhuntDarkMojave from '../images/Dockhunt-dark-mojave.png';
+import dockhuntDarkVentura from '../images/Dockhunt-dark-ventura.png';
+import dockhuntLightBigSur from '../images/dockhunt-light-bigsur.png';
+import dockhuntLightVentura from '../images/dockhunt-light-ventura.png';
+import { useState } from "react";
+
+const images = [
+  dockhuntDarkBigSur,
+  dockhuntDarkMojave,
+  dockhuntDarkVentura,
+  dockhuntLightBigSur,
+  dockhuntLightVentura
+]
 
 const Home: NextPage = () => {
   const featuredDocks = api.docks.getFeatured.useQuery();
+  const [imgSrc, setImgSrc] = useState(dockhuntDarkBigSur)
+
+  const cycleImage = () => {
+    const index = images.indexOf(imgSrc)
+    const nextIndex = index === images.length - 1 ? 0 : index + 1
+    setImgSrc(images[nextIndex]!)
+  }
 
   return (
     <>
@@ -16,10 +38,10 @@ const Home: NextPage = () => {
         <meta name="description" content="Visualize people's Mac docks" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-black text-white">
+      <main className="flex min-h-screen flex-col items-center bg-black text-white">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <h1 className="text-5xl font-extrabold sm:text-[5rem]">
-            Dockhunt ⚓︎
+            <Image src={imgSrc} alt="Dockhunt logo" width={120} height={120} onMouseEnter={cycleImage} />
           </h1>
           <div className="flex gap-12">
             {featuredDocks.data

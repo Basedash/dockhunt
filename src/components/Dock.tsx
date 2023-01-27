@@ -4,12 +4,12 @@ import type { App } from "@prisma/client";
 const DockItem = ({ app }: { app: App }) => {
   const variants = {
     hover: {
-      width: 68,
-      height: 52
+      width: 92,
+      height: 80
     },
     initial: {
-      width: 52,
-      height: 52
+      width: 80,
+      height: 80
     }
   };
 
@@ -31,13 +31,13 @@ const DockItem = ({ app }: { app: App }) => {
       <motion.img
         variants={{
           hover: {
-            width: 68,
-            height: 68,
+            width: 92,
+            height: 92,
             y: -12
           },
           initial: {
-            width: 52,
-            height: 52
+            width: 80,
+            height: 80
           }
         }}
         transition={{
