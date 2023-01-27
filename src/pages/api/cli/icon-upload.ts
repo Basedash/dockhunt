@@ -52,6 +52,7 @@ export default function handler(
 ) {
   if (req.method === "POST") {
     const form = formidable();
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     form.parse(req, async function (err, fields, files) {
       if (err) {
         return res.status(400).json({ message: "Error parsing form" });
