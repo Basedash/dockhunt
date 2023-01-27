@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { api } from "../../utils/api";
+import { env } from "env/server.mjs";
 
 export default function UserPage() {
   const router = useRouter();
@@ -18,7 +19,7 @@ export default function UserPage() {
         <title>
           {user.data ? `Dockhunt | ${user.data.username}` : "Dockhunt"}
         </title>
-        <meta name={'og:image'} content={`/api/og?username=${username}`} key={'opengraph-image'} />
+        <meta name={'og:image'} content={`${env.NEXTAUTH_URL}/api/og?username=${username}`} key={'opengraph-image'} />
       </Head>
       <main className="flex h-screen w-screen flex-col items-center bg-mojave bg-cover text-white">
         {user.data ? (
