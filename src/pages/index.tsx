@@ -16,7 +16,10 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Dockhunt</title>
-        <meta name="description" content="Discover the apps everyone is docking about" />
+        <meta
+          name="description"
+          content="Discover the apps everyone is docking about"
+        />
       </Head>
       <div className="flex w-screen max-w-[80rem] flex-col gap-20 px-20 py-24">
         {featuredDocks.data
@@ -26,7 +29,7 @@ const Home: NextPage = () => {
                   {format(dock.createdAt, "MMM d, y")}
                 </p>
                 <div
-                  className={`relative flex justify-center gap-12 rounded-3xl border border-solid border-gray-700 bg-mojave bg-cover bg-center px-12 pt-40 pb-6`}
+                  className={`relative flex justify-center gap-12 rounded-3xl border border-solid border-gray-700 bg-mojave bg-cover bg-center px-12 pt-40 pb-6 opacity-50 transition-opacity duration-300 ease-in-out hover:opacity-100`}
                 >
                   <Link
                     href={`/users/${dock.user.username}`}

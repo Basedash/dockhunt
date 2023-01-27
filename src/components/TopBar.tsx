@@ -1,89 +1,51 @@
-import dockhuntDarkBigSur from "images/Dockhunt-dark-bigsur.png";
-import dockhuntDarkMojave from "images/Dockhunt-dark-mojave.png";
-import dockhuntDarkVentura from "images/Dockhunt-dark-ventura.png";
-import dockhuntLightBigSur from "images/dockhunt-light-bigsur.png";
-import dockhuntLightVentura from "images/dockhunt-light-ventura.png";
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import logo from "images/logo.svg";
 import { signIn, signOut, useSession } from "next-auth/react";
-
-const images = [
-  dockhuntDarkBigSur,
-  dockhuntDarkMojave,
-  dockhuntDarkVentura,
-  dockhuntLightBigSur,
-  dockhuntLightVentura,
-];
+import { useEffect, useState } from "react";
+import { format } from "date-fns";
 
 export const TopBar = () => {
-  const [imgSrc, setImgSrc] = useState(dockhuntDarkBigSur);
-
-  const cycleImage = () => {
-    const index = images.indexOf(imgSrc);
-    const nextIndex = index === images.length - 1 ? 0 : index + 1;
-    setImgSrc(images[nextIndex]!);
-  };
-
-  return (
-    <div
-      className={"fixed z-10 flex w-full items-start justify-center px-4 pt-4"}
-    >
-      <div className={"absolute left-4 top-4"}>
-        <AuthShowcase />
-      </div>
-      <h1 className="pt-4 text-5xl font-extrabold sm:text-[5rem]">
-        <Link href="/">
-          <Image
-            src={imgSrc}
-            alt="Dockhunt logo"
-            width={120}
-            height={120}
-            onMouseEnter={cycleImage}
-          />
-        </Link>
-      </h1>
-      <div className={"absolute right-4 top-4 flex"}>
-        <Link
-          href={"/new-dock?app=Notion&app=Slack&app=Basedash"}
-          className={
-            "rounded-full bg-cyan-300 px-8 py-2 font-semibold text-black transition hover:bg-cyan-200"
-          }
-        >
-          Add your dock
-        </Link>
-      </div>
-    </div>
-  );
-};
-
-const AuthShowcase: React.FC = () => {
   const { data: sessionData } = useSession();
 
+  const [date, setDate] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDate(new Date());
+    }, 5000); // Update every 5 seconds so we don't get too out of sync
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <div className="flex items-center justify-center gap-2">
-      {sessionData && sessionData.user && (
-        <Link href={`/users/${sessionData.user.username}`}>
-          <Image
-            // TODO: Use a default image for placeholder
-            src={sessionData.user.image ?? ""}
-            alt={`${sessionData.user.name} avatar`}
-            className={"rounded-full"}
-            width="30"
-            height="30"
-          />
+    <div className="fixed z-10 flex w-full items-center justify-between bg-gray-800/30 px-4 py-1 backdrop-blur-3xl">
+      <div className="flex items-center gap-4">
+        <Link className="flex gap-2 font-medium" href="/">
+          <Image src={logo} alt="Dockhunt" height="16" />
+          Dockhunt
         </Link>
-      )}
-      <button
-        className="rounded-full bg-white/10 p-3 py-1 font-semibold text-white no-underline transition hover:bg-white/20"
-        onClick={
-          sessionData
-            ? () => void signOut({ redirect: false })
-            : () => void signIn("twitter")
-        }
-      >
-        {sessionData ? "Sign out" : "Sign in"}
-      </button>
+        <Link href="/new-dock?app=Notion&app=Slack&app=Basedash">Add dock</Link>
+        <button
+          onClick={
+            sessionData
+              ? () => void signOut({ redirect: false })
+              : () => void signIn("twitter")
+          }
+        >
+          {sessionData ? "Log out" : "Log in"}
+        </button>
+      </div>
+
+      <div className="flex items-center gap-4">
+        <Link href="https://www.basedash.com">Made by Basedash</Link>
+        <div className="tabular-nums">{format(date, "eee MMM d p")}</div>
+        {sessionData && sessionData.user && (
+          <Link href={`/users/${sessionData.user.username}`}>
+            {sessionData.user.name}
+          </Link>
+        )}
+      </div>
     </div>
   );
 };
