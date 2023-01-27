@@ -18,7 +18,7 @@ export default function handler(req: NextRequest) {
       (
         <div
           style={{
-            // backgroundImage: `url("${env.NEXTAUTH_URL}/og-wallpaper.jpg")`,
+            backgroundImage: `url("${process.env.NEXTAUTH_URL as string}/og-wallpaper.jpg")`,
             backgroundSize: 'cover',
             width: '1200px',
             height: '630px',
