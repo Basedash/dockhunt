@@ -13,6 +13,8 @@ export const authOptions: NextAuthOptions = {
     session({ session, user }) {
       if (session.user) {
         session.user.id = user.id;
+        session.user.image = user.avatarUrl;
+        session.user.username = user.username
       }
       return session;
     },
