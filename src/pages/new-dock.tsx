@@ -60,7 +60,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   )
   // Hack to convert undefined values to null for user.image
   // TODO: Fix why user.image is undefined. Probably need to map it to "avatarUrl" in DB
-  if (session) {
+  if (session && session.user) {
     session.user.image = session.user.image ?? null;
   }
   return {
