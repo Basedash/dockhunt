@@ -1,8 +1,8 @@
-import dockhuntDarkBigSur from "src/images/Dockhunt-dark-bigsur.png";
-import dockhuntDarkMojave from "src/images/Dockhunt-dark-mojave.png";
-import dockhuntDarkVentura from "src/images/Dockhunt-dark-ventura.png";
-import dockhuntLightBigSur from "src/images/dockhunt-light-bigsur.png";
-import dockhuntLightVentura from "src/images/dockhunt-light-ventura.png";
+import dockhuntDarkBigSur from "images/Dockhunt-dark-bigsur.png";
+import dockhuntDarkMojave from "images/Dockhunt-dark-mojave.png";
+import dockhuntDarkVentura from "images/Dockhunt-dark-ventura.png";
+import dockhuntLightBigSur from "images/dockhunt-light-bigsur.png";
+import dockhuntLightVentura from "images/dockhunt-light-ventura.png";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";

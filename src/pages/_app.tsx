@@ -5,7 +5,7 @@ import { SessionProvider } from "next-auth/react";
 import { api } from "../utils/api";
 
 import "../styles/globals.css";
-import { TopBar } from "src/components/TopBar";
+import { TopBar } from "components/TopBar";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
