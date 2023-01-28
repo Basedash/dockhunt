@@ -1,5 +1,7 @@
 /* Route to upload app icons (if the app doesn't already have an icon in our database)
  * If an icon is found in the DB for the given app name, we will ignore the image in the request.
+ *
+ * Note that this route also works for just saving an app with no icon in the db. We should probably rename it.
  **/
 
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -75,20 +77,25 @@ export default function handler(
         }
         const file = files.icon;
         if (!file) {
-          return res.status(400).json({ error: "File not found" });
+          console.warn("No icon file found for app: ", appName);
         }
 
-        if (Array.isArray(file)) {
-          return res.status(400).json({ error: "Only 1 file permitted" });
+        let uploadedFile: aws.S3.ManagedUpload.SendData | undefined;
+
+        if (file) {
+          if (Array.isArray(file)) {
+            return res.status(400).json({ error: "Only 1 file permitted" });
+          }
+          if (file.size > 1 * 1024 * 1024) {
+            // Make sure file is less than 1MB
+            return res.status(400).json({ error: "File is too large" });
+          }
+          uploadedFile = await uploadFile({
+            file,
+            bucketName: "dockhunt-images",
+          });
         }
-        if (file.size > 1 * 1024 * 1024) {
-          // Make sure file is less than 1MB
-          return res.status(400).json({ error: "File is too large" });
-        }
-        const uploadedFile = await uploadFile({
-          file,
-          bucketName: "dockhunt-images",
-        });
+
 
         const app = await prisma.app.upsert({
           where: {
@@ -96,10 +103,12 @@ export default function handler(
           },
           create: {
             name: appName,
-            iconUrl: `https://dockhunt-images.nyc3.cdn.digitaloceanspaces.com/${uploadedFile.Key}`,
+            iconUrl: uploadedFile ? `https://dockhunt-images.nyc3.cdn.digitaloceanspaces.com/${uploadedFile.Key}` : null,
           },
           update: {
-            iconUrl: `https://dockhunt-images.nyc3.cdn.digitaloceanspaces.com/${uploadedFile.Key}`,
+            // Important to use `undefined` and not `null` here to avoid overwriting existing icon if the user calls this endpoint with no icon,
+            // but there is already an icon in the DB
+            iconUrl: uploadedFile ? `https://dockhunt-images.nyc3.cdn.digitaloceanspaces.com/${uploadedFile.Key}` : undefined,
           },
         });
 

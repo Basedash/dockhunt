@@ -16,19 +16,29 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         name: {
           in: arrayOfAppNames
         },
-        iconUrl: {
-          not: null
-        }
       }
     });
-    const appsWithImages = new Set(correspondingAppsFromDatabase.map(app => app.name));
-    const appsMissingIcon = [];
+    const appToAppname = new Map(correspondingAppsFromDatabase.map(app => [app.name, app]));
+
+    const missingAppsInformation: {name: string; foundInDb: boolean; missingAppIcon: boolean;}[] = [];
+
     for (const appName of arrayOfAppNames) {
-      if (!appsWithImages.has(appName)) {
-        appsMissingIcon.push(appName);
+      const appFromDatabase = appToAppname.get(appName);
+      if (appFromDatabase && !appFromDatabase.iconUrl) {
+        missingAppsInformation.push({
+          name: appName,
+          foundInDb: true,
+          missingAppIcon: true,
+        });
+      } else if (!appFromDatabase) {
+        missingAppsInformation.push({
+          name: appName,
+          foundInDb: false,
+          missingAppIcon: true,
+        });
       }
     }
-    return res.json({appsMissingIcon})
+    return res.json({missingAppsInformation})
   } else {
     return res.status(405).json({ message: "Method not allowed" });
 
