@@ -7,7 +7,7 @@ import Script from "next/script";
 import { api } from "../utils/api";
 
 import "../styles/globals.css";
-import { TopBar } from "components/TopBar";
+import { MenuBar } from "components/MenuBar";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -28,7 +28,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         />
       </Head>
       <main className="flex min-h-screen flex-col items-center bg-neutral-900 text-white">
-        <TopBar />
+        <MenuBar />
         <Component {...pageProps} />
       </main>
     </SessionProvider>

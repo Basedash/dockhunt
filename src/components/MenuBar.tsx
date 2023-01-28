@@ -1,11 +1,15 @@
+import { format } from "date-fns";
+import basedash from "images/basedash.svg";
+import dockhunt from "images/dockhunt.svg";
+import github from "images/github.svg";
+import npm from "images/npm.svg";
+import twitter from "images/twitter.svg";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "images/logo.svg";
-import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { format } from "date-fns";
 
-export const TopBar = () => {
+export const MenuBar = () => {
   const { data: sessionData } = useSession();
 
   const [date, setDate] = useState(new Date());
@@ -22,10 +26,12 @@ export const TopBar = () => {
     <div className="fixed z-10 flex w-full items-center justify-between bg-gray-800/30 px-4 py-1 text-sm backdrop-blur-3xl">
       <div className="flex items-center gap-4">
         <Link className="flex gap-4 font-bold" href="/">
-          <Image src={logo} alt="Dockhunt" height="16" />
+          <Image src={dockhunt} alt="Dockhunt" height="16" />
           Dockhunt
         </Link>
-        <Link href="/new-dock?app=Notion&app=Slack&app=Basedash">Add dock</Link>
+        <Link href="/new-dock?app=Notion&app=Slack&app=Basedash">
+          Add your dock
+        </Link>
         <button
           onClick={
             sessionData
@@ -35,11 +41,36 @@ export const TopBar = () => {
         >
           {sessionData ? "Log out" : "Log in"}
         </button>
+        <a href="https://www.basedash.com" target="_blank" rel="noreferrer">
+          Made by Basedash
+        </a>
       </div>
 
       <div className="flex items-center gap-4">
         <a href="https://www.basedash.com" target="_blank" rel="noreferrer">
-          Made by Basedash
+          <Image src={basedash} alt="Basedash" height="16" />
+        </a>
+        <a
+          href="https://twitter.com/dockhuntapp"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Image src={twitter} alt="Twitter" height="16" />
+        </a>
+        <a
+          href="https://github.com/Basedash/dockhunt"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Image src={github} alt="GitHub" height="20" />
+        </a>
+        <a
+          className="fill-white"
+          href="https://www.npmjs.com/package/dockhunt"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Image src={npm} alt="npm" height="20" />
         </a>
         <div className="tabular-nums">{format(date, "eee MMM d p")}</div>
         {sessionData && sessionData.user && (
