@@ -64,11 +64,17 @@ const DockItem = ({ app }: { app: App }) => {
 
 export function Dock({ apps }: { apps: App[] }) {
   return (
-    <div className="max-w-full flex-1 overflow-x-auto rounded-[22px] border border-gray-600/60 bg-gray-800/60 backdrop-blur">
-      <div className="flex min-w-min">
-        {apps.map((app) => (
-          <DockItem key={app.name} app={app} />
-        ))}
+    <div className={'relative'}>
+      {/* Dock background */}
+      <div className="max-w-full h-[80px] rounded-[22px] border border-gray-600/60 bg-gray-800/60 backdrop-blur absolute top-0 left-0 right-0 bottom-0">
+      </div>
+      {/* Scrollable container */}
+      <div className="max-w-full flex-1 overflow-x-auto">
+        <div className="flex min-w-min">
+          {apps.map((app) => (
+            <DockItem key={app.name} app={app} />
+          ))}
+        </div>
       </div>
     </div>
   );
