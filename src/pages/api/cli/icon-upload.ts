@@ -55,6 +55,7 @@ export default function handler(
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     form.parse(req, async function (err, fields, files) {
       if (err) {
+        console.log('err', err);
         return res.status(400).json({ message: "Error parsing form" });
       } else {
         const appName = fields.app;

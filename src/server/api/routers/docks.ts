@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const docksRouter = createTRPCRouter({
   getOne: publicProcedure
@@ -22,4 +22,34 @@ export const docksRouter = createTRPCRouter({
       orderBy: { createdAt: "desc" },
     });
   }),
+  createDock: protectedProcedure
+    .input(
+      z.object({
+        apps: z.array(z.string()),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      await ctx.prisma.dock.delete({
+        where: {
+          userId: ctx.session.user.id,
+        }
+      })
+      return ctx.prisma.dock.create({
+        data: {
+          user: {
+            connect: {
+              username: ctx.session.user.username,
+            },
+          },
+          dockItems: {
+            createMany: {
+              data: input.apps.map((app, index) => ({
+                appId: app,
+                position: index,
+              })),
+            },
+          },
+        },
+      });
+    }),
 });

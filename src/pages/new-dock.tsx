@@ -4,7 +4,7 @@ import { api } from "../utils/api";
 import { Dock } from "../components/Dock";
 import Head from "next/head";
 import { signIn, useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { unstable_getServerSession } from "next-auth";
 import type { GetServerSidePropsContext } from "next";
@@ -16,13 +16,12 @@ const NewDock = () => {
   const appNames = Array.isArray(queryParams.app)
     ? queryParams.app
     : [queryParams.app ?? ""];
-  const apps = api.apps.getManyFromNames.useQuery({ names: appNames });
-
-  const orderedApps = apps.data
-    ? appNames
-        .map((appName) => apps.data.find((app) => app.name === appName))
-        .filter((app): app is App => app !== undefined)
-    : [];
+  const creatingDockRef = useRef(false);
+  const createDockMutation = api.docks.createDock.useMutation({
+    onSuccess: async () => {
+      await router.replace(`/users/${session?.user?.username ?? ''}`);
+    },
+  });
 
   useEffect(() => {
     const handleSigninIfNotSignedIn = async () => {
@@ -33,6 +32,18 @@ const NewDock = () => {
     void handleSigninIfNotSignedIn();
   }, [session]);
 
+  useEffect(() => {
+    const handleGenerateDock = () => {
+      if (session && creatingDockRef.current === false) {
+        creatingDockRef.current = true
+        createDockMutation.mutate({
+          apps: appNames,
+        });
+      }
+    };
+    handleGenerateDock();
+  }, [appNames, createDockMutation, session]);
+
   return (
     <>
       <Head>
@@ -42,8 +53,7 @@ const NewDock = () => {
       </Head>
       {session && (
         <div className="flex min-h-screen flex-col items-center justify-center">
-          <h1 className={"mb-4 text-xl"}>New dock page</h1>
-          <Dock apps={orderedApps} />
+          <h1 className={"mb-4 text-xl"}>Generating your dock...</h1>
         </div>
       )}
     </>
