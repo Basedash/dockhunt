@@ -13,7 +13,7 @@ export function DockCard({
 }) {
   return (
     <div key={dock.id} className={"flex flex-col"}>
-      <p className="mb-2 text-sm text-gray-600">
+      <p className="mb-2 text-sm text-gray-500">
         <a
           className="hover:underline"
           href={`https://twitter.com/${dock.user.username}`}
