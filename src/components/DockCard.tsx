@@ -1,6 +1,7 @@
 import type { inferRouterOutputs } from "@trpc/server";
 import format from "date-fns/format";
 import Image from "next/image";
+import Link from "next/link";
 import type { AppRouter } from "server/api/root";
 
 import { Dock as DockComponent } from "./Dock";
@@ -16,6 +17,8 @@ export function DockCard({
         <a
           className="hover:underline"
           href={`https://twitter.com/${dock.user.username}`}
+          target="_blank"
+          rel="noreferrer"
         >
           @{dock.user.username}
         </a>{" "}
@@ -35,7 +38,7 @@ export function DockCard({
           />
         </div>
 
-        <a
+        <Link
           className="h-64 w-full rounded-3xl border border-solid border-gray-600/60 bg-mojave bg-cover bg-center opacity-60 transition-opacity duration-300 ease-in-out hover:opacity-100"
           href={`/users/${dock.user.username}`}
         />
