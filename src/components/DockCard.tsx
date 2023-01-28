@@ -26,7 +26,7 @@ export function DockCard({
       </p>
 
       <div className="relative flex justify-center gap-12">
-        <div className="absolute top-1/2 left-0 z-10 -translate-x-1/2 -translate-y-1/2 text-gray-600">
+        <div className="absolute top-4 z-10 text-gray-600 md:top-1/2 md:left-0 md:-translate-x-1/2 md:-translate-y-1/2">
           {/* TODO: Use placeholder image for null values */}
           {/* TODO: On hover show tooltip of name */}
           <Image
@@ -39,11 +39,11 @@ export function DockCard({
         </div>
 
         <Link
-          className={`h-64 w-full rounded-3xl border border-solid border-gray-600/60 bg-monterey bg-cover bg-center opacity-60 transition-opacity duration-300 ease-in-out hover:opacity-100`}
+          className={`h-52 w-full rounded-[36px] border border-solid border-gray-600/60 bg-monterey bg-cover bg-center opacity-60 transition-opacity duration-300 ease-in-out hover:opacity-100 md:h-64`}
           href={`/users/${dock.user.username}`}
         />
 
-        <div className="absolute bottom-4 max-w-full px-12">
+        <div className="absolute bottom-4 max-w-full px-4 md:px-12">
           <DockComponent
             apps={dock.dockItems.map((dockItem) => dockItem.app)}
           />

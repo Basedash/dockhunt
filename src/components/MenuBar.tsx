@@ -23,7 +23,7 @@ export const MenuBar = () => {
   }, []);
 
   return (
-    <div className="fixed z-10 flex w-full items-center justify-between bg-gray-800/30 px-4 py-1 text-sm backdrop-blur-3xl">
+    <div className="fixed z-20 flex w-full items-center justify-between bg-gray-800/30 px-4 py-1 text-sm backdrop-blur-3xl">
       <div className="flex items-center gap-4">
         <Link className="flex gap-4 font-bold" href="/">
           <Image src={dockhunt} alt="Dockhunt" height="16" />
