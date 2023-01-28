@@ -29,9 +29,7 @@ export const MenuBar = () => {
           <Image src={dockhunt} alt="Dockhunt" height="16" />
           Dockhunt
         </Link>
-        <Link href="/new-dock?app=Notion&app=Slack&app=Basedash">
-          Add your dock
-        </Link>
+        <Link href="/add-dock">Add your dock</Link>
         <button
           onClick={
             sessionData
