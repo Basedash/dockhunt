@@ -1,4 +1,6 @@
 import Head from "next/head";
+import pinnedDocks from "images/pinned.jpg";
+import Image from 'next/image';
 
 const AddDock = () => {
   return (
@@ -8,7 +10,7 @@ const AddDock = () => {
         <meta name="description" content="Add your dock" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <div className="flex min-h-screen flex-col items-start justify-center px-4">
+      <div className="flex min-h-screen flex-col items-start justify-center px-4 max-w-[800px]">
         <p className={"mb-8 text-xl"}>
           To add your own dock, run the following command in your terminal:
         </p>
@@ -23,6 +25,11 @@ const AddDock = () => {
             <li>Create a dock on this website</li>
           </ol>
         </p>
+        <p className={"mb-8 text-xl"}>
+          Dockhunt will only use the apps that are pinned to your dock. Those are the apps you marked as "Stay in dock" when
+          you right-clicked on them and selected "Options". The apps that are not pinned will be ignored.
+        </p>
+        <Image className={'mb-8'} src={pinnedDocks} alt={"Pinned vs recent dock items"} />
         <a
           href="https://github.com/Basedash/dockhunt"
           target="_blank"
