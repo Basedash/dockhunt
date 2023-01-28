@@ -32,6 +32,13 @@ export const docksRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
+      const usersDockIsCurrentlyFeatured =
+        (await ctx.prisma.dock.count({
+          where: {
+            featured: true,
+            userId: ctx.session.user.id,
+          },
+        })) > 0;
       await ctx.prisma.dock.deleteMany({
         where: {
           userId: ctx.session.user.id,
@@ -39,6 +46,7 @@ export const docksRouter = createTRPCRouter({
       });
       return ctx.prisma.dock.create({
         data: {
+          featured: usersDockIsCurrentlyFeatured,
           user: {
             connect: {
               username: ctx.session.user.username,
