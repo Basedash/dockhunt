@@ -35,7 +35,7 @@ export default function UserPage() {
           key={"opengraph-image"}
         />
       </Head>
-      <div className="flex h-screen w-screen flex-col items-center justify-center bg-mojave bg-cover">
+      <div className="flex h-screen w-screen flex-col items-center justify-center bg-monterey bg-cover">
         {user.data ? (
           <>
             <div className="flex flex-col items-center pb-20">

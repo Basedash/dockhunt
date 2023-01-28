@@ -39,7 +39,7 @@ export function DockCard({
         </div>
 
         <Link
-          className="h-64 w-full rounded-3xl border border-solid border-gray-600/60 bg-mojave bg-cover bg-center opacity-60 transition-opacity duration-300 ease-in-out hover:opacity-100"
+          className={`h-64 w-full rounded-3xl border border-solid border-gray-600/60 bg-monterey bg-cover bg-center opacity-60 transition-opacity duration-300 ease-in-out hover:opacity-100`}
           href={`/users/${dock.user.username}`}
         />
 
