@@ -20,9 +20,9 @@ const Home: NextPage = () => {
           content="Discover the apps everyone is docking about"
         />
       </Head>
-      <div className={'px-12 py-24 md:px-20 w-screen max-w-[80rem]'}>
+      <div className={'px-12 py-24 md:px-20 w-screen max-w-[80rem] overflow-hidden'}>
         <h2 className={'text-3xl mb-12'}>Featured</h2>
-        <div className="flex flex-col gap-20 overflow-hidden">
+        <div className="flex flex-col gap-20">
           {featuredDocks.data
             ? featuredDocks.data.map((dock) => (
                 <DockCard key={dock.id} dock={dock} />
@@ -30,7 +30,7 @@ const Home: NextPage = () => {
             : "Loading..."}
         </div>
         <h2 className={'text-3xl mt-24 mb-12'}>Latest</h2>
-        <div className="flex flex-col gap-20 overflow-hidden">
+        <div className="flex flex-col gap-20">
           {latestDocks.data
             ? latestDocks.data.map((dock) => (
                 <DockCard key={dock.id} dock={dock} />
