@@ -13,6 +13,16 @@ export default function UserPage() {
 
   const user = api.users.getOne.useQuery({ username: username });
 
+  if (!user.data) {
+    return (
+      <>
+        <Head>
+          <title>Dockhunt | {username}</title>
+        </Head>
+      </>
+    );
+  }
+
   return (
     <>
       <Head>

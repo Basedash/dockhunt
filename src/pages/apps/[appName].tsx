@@ -1,3 +1,4 @@
+import { DockCard } from "components/DockCard";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -11,53 +12,74 @@ export default function AppPage() {
 
   const app = api.apps.getOne.useQuery({ name: appName });
 
-  const twitterHandle = app.data?.twitterUrl?.split("/").at(-1);
+  if (!app.data) {
+    return (
+      <>
+        <Head>
+          <title>Dockhunt | {appName}</title>
+        </Head>
+      </>
+    );
+  }
+
+  if (!app.data || !app.data.app) {
+    return (
+      <>
+        <Head>
+          <title>Dockhunt | App not found</title>
+        </Head>
+        <div className="flex h-screen flex-col items-center justify-center">
+          <h1 className="text-3xl font-black">App not found</h1>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
       <Head>
-        <title>{app.data ? `Dockhunt | ${app.data.name}` : "Dockhunt"}</title>
+        <title>Dockhunt | {app.data.app.name}</title>
       </Head>
       <div className="flex flex-col items-center">
-        {app.data ? (
-          <>
-            {app.data.iconUrl && (
-              <Image
-                src={app.data.iconUrl}
-                alt={`${app.data.name} app icon`}
-                className="mt-20"
-                width="150"
-                height="150"
-              />
-            )}
-            <h1 className="mt-2 text-[40px] font-black">{app.data.name}</h1>
-            <p className="mt-3 text-gray-300">{app.data.description}</p>
-            <div className="mt-2 flex gap-4">
-              {app.data.websiteUrl && (
-                <a
-                  className="text-gray-300 hover:underline"
-                  href={app.data.websiteUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Website
-                </a>
-              )}
-              {app.data.twitterUrl && (
-                <a
-                  className="text-gray-300 hover:underline"
-                  href={app.data.twitterUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  @{twitterHandle}
-                </a>
-              )}
-            </div>
-          </>
-        ) : (
-          <span>Loading...</span>
+        {app.data.app.iconUrl && (
+          <Image
+            src={app.data.app.iconUrl}
+            alt={`${app.data.app.name} app icon`}
+            className="mt-20"
+            width="150"
+            height="150"
+          />
         )}
+        <h1 className="mt-2 text-[40px] font-black">{app.data.app.name}</h1>
+        <p className="mt-3 text-gray-300">{app.data.app.description}</p>
+        <div className="mt-2 flex gap-4">
+          {app.data.app.websiteUrl && (
+            <a
+              className="text-gray-300 hover:underline"
+              href={app.data.app.websiteUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Website
+            </a>
+          )}
+          {app.data.app.twitterUrl && (
+            <a
+              className="text-gray-300 hover:underline"
+              href={app.data.app.twitterUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              @{app.data.app.twitterUrl.split("/").at(-1)}
+            </a>
+          )}
+        </div>
+
+        <div className="flex w-screen max-w-[80rem] flex-col gap-20 overflow-hidden px-20 py-24">
+          {app.data.docks.map((dock) => (
+            <DockCard key={dock.id} dock={dock} />
+          ))}
+        </div>
       </div>
     </>
   );
