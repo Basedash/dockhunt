@@ -1,6 +1,6 @@
 import Head from "next/head";
 import pinnedDocks from "images/pinned.jpg";
-import Image from 'next/image';
+import Image from "next/image";
 
 const AddDock = () => {
   return (
@@ -10,7 +10,7 @@ const AddDock = () => {
         <meta name="description" content="Add your dock" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <div className="flex min-h-screen max-w-[800px] flex-col items-start justify-center px-4">
+      <div className="flex min-h-screen max-w-[800px] flex-col items-start justify-center px-8 py-20">
         <p className={"mb-8 text-xl"}>
           To add your own dock, run the following command in your terminal:
         </p>
