@@ -19,7 +19,10 @@ export const docksRouter = createTRPCRouter({
           orderBy: { position: "asc" },
         },
       },
-      orderBy: { createdAt: "desc" },
+      orderBy: [
+        { user: { twitterFollowerCount: "desc" } },
+        { createdAt: "desc" },
+      ],
     });
   }),
   createDock: protectedProcedure
@@ -32,8 +35,8 @@ export const docksRouter = createTRPCRouter({
       await ctx.prisma.dock.delete({
         where: {
           userId: ctx.session.user.id,
-        }
-      })
+        },
+      });
       return ctx.prisma.dock.create({
         data: {
           user: {
