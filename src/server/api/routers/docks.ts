@@ -32,7 +32,7 @@ export const docksRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      await ctx.prisma.dock.delete({
+      await ctx.prisma.dock.deleteMany({
         where: {
           userId: ctx.session.user.id,
         },
