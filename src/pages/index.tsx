@@ -9,6 +9,7 @@ import { DockCard } from "components/DockCard";
 
 const Home: NextPage = () => {
   const featuredDocks = api.docks.getFeatured.useQuery();
+  const latestDocks = api.docks.getLatest.useQuery();
 
   return (
     <>
@@ -19,12 +20,23 @@ const Home: NextPage = () => {
           content="Discover the apps everyone is docking about"
         />
       </Head>
-      <div className="flex w-screen max-w-[80rem] flex-col gap-20 overflow-hidden px-6 py-24 md:px-20">
-        {featuredDocks.data
-          ? featuredDocks.data.map((dock) => (
-              <DockCard key={dock.id} dock={dock} />
-            ))
-          : "Loading..."}
+      <div className={'px-12 py-24 md:px-20 w-screen max-w-[80rem]'}>
+        <h2 className={'text-3xl mb-12'}>Featured</h2>
+        <div className="flex flex-col gap-20 overflow-hidden">
+          {featuredDocks.data
+            ? featuredDocks.data.map((dock) => (
+                <DockCard key={dock.id} dock={dock} />
+              ))
+            : "Loading..."}
+        </div>
+        <h2 className={'text-3xl mt-24 mb-12'}>Latest</h2>
+        <div className="flex flex-col gap-20 overflow-hidden">
+          {latestDocks.data
+            ? latestDocks.data.map((dock) => (
+                <DockCard key={dock.id} dock={dock} />
+              ))
+            : "Loading..."}
+        </div>
       </div>
     </>
   );

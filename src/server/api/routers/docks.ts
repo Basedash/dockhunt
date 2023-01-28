@@ -25,6 +25,24 @@ export const docksRouter = createTRPCRouter({
       ],
     });
   }),
+  getLatest: publicProcedure.query(({ ctx }) => {
+    return ctx.prisma.dock.findMany({
+      where: { featured: false },
+      include: {
+        user: true,
+        dockItems: {
+          include: {
+            app: true,
+          },
+          orderBy: { position: "asc" },
+        },
+      },
+      orderBy: [
+        { createdAt: "desc" },
+      ],
+      take: 6
+    });
+  }),
   createDock: protectedProcedure
     .input(
       z.object({
