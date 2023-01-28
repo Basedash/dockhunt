@@ -20,7 +20,7 @@ const DockItem = ({ app }: { app: App }) => {
         variants={variants}
         whileHover="hover"
         initial="initial"
-        className="dockItem h-[60px] h-[60px]"
+        className="dockItem h-[60px]"
         transition={{
           type: "spring",
           damping: 60,
@@ -64,10 +64,12 @@ const DockItem = ({ app }: { app: App }) => {
 
 export function Dock({ apps }: { apps: App[] }) {
   return (
-    <div className="flex max-w-full overflow-x-scroll rounded-[22px] border border-gray-600/60 bg-gray-800/60 backdrop-blur">
-      {apps.map((app) => (
-        <DockItem key={app.name} app={app} />
-      ))}
+    <div className="max-w-full flex-1 overflow-x-auto rounded-[22px] border border-gray-600/60 bg-gray-800/60 backdrop-blur">
+      <div className="flex min-w-min">
+        {apps.map((app) => (
+          <DockItem key={app.name} app={app} />
+        ))}
+      </div>
     </div>
   );
 }
