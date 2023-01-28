@@ -43,7 +43,7 @@ export function DockCard({
           href={`/users/${dock.user.username}`}
         />
 
-        <div className="absolute bottom-4 max-w-full px-8">
+        <div className="absolute bottom-4 max-w-full px-12">
           <DockComponent
             apps={dock.dockItems.map((dockItem) => dockItem.app)}
           />

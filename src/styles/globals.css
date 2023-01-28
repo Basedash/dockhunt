@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+	.fade-lr {
+		mask-image: radial-gradient(circle at center, black 97.6%, transparent 98.8%, transparent);
+	}
+}
