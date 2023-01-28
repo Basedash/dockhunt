@@ -19,7 +19,7 @@ const Home: NextPage = () => {
           content="Discover the apps everyone is docking about"
         />
       </Head>
-      <div className="flex w-screen max-w-[80rem] flex-col gap-20 overflow-hidden px-20 py-24">
+      <div className="flex w-screen max-w-[80rem] flex-col gap-20 overflow-hidden px-12 py-24 md:px-20">
         {featuredDocks.data
           ? featuredDocks.data.map((dock) => (
               <DockCard key={dock.id} dock={dock} />
