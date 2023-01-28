@@ -1,10 +1,15 @@
-import type { Dock } from "@prisma/client";
+import type { inferRouterOutputs } from "@trpc/server";
 import format from "date-fns/format";
 import Image from "next/image";
+import type { AppRouter } from "server/api/root";
 
 import { Dock as DockComponent } from "./Dock";
 
-export function DockCard({ dock }: { dock: Dock }) {
+export function DockCard({
+  dock,
+}: {
+  dock: inferRouterOutputs<AppRouter>["docks"]["getFeatured"][0];
+}) {
   return (
     <div key={dock.id} className={"flex flex-col"}>
       <p className="mb-2 text-sm text-gray-600">
