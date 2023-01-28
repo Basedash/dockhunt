@@ -18,7 +18,7 @@ export default function handler(req: NextRequest, res: NextApiResponse) {
       (
         <div
           style={{
-            backgroundImage: `url("${process.env.NEXTAUTH_URL as string}/og-wallpaper.jpg")`,
+            // backgroundImage: `url("${process.env.NEXTAUTH_URL as string}/og-wallpaper.jpg")`,
             backgroundSize: 'cover',
             width: '1200px',
             height: '630px',
@@ -39,7 +39,7 @@ export default function handler(req: NextRequest, res: NextApiResponse) {
               marginBottom: '16px'
             }}
           >
-            <img src={`${process.env.NEXTAUTH_URL as string}/og-dockhunt.png`} height={126} width={126} />
+            {/*<img src={`${process.env.NEXTAUTH_URL as string}/og-dockhunt.png`} height={126} width={126} />*/}
           </div>
           <div
             style={{
