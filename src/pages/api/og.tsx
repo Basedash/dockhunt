@@ -82,7 +82,6 @@ export default function handler(req: NextRequest, res: NextApiResponse) {
           <div
             style={{
               display: "flex",
-              marginTop: 30,
               border: "1px solid rgba(75,85,99,.6)",
               backgroundColor: "rgba(31,41,55,.6)",
               borderRadius: "15px",
