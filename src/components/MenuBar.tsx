@@ -55,7 +55,7 @@ export const MenuBar = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <Image src={twitter} alt="Twitter" height="16" />
+          <Image src={twitter} alt="Twitter" height="18" />
         </a>
         <a
           href="https://github.com/Basedash/dockhunt-cli"
