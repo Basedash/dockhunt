@@ -3,7 +3,6 @@ import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { api } from "../../utils/api";
-import { env } from "env/client.mjs";
 
 export default function UserPage() {
   const router = useRouter();
@@ -23,6 +22,10 @@ export default function UserPage() {
     );
   }
 
+  const appIconUrls = user.data.dock?.dockItems
+    .map((dockItem) => dockItem.app.iconUrl)
+    .filter((url): url is string => url !== null);
+
   const title = user.data ? `Dockhunt | ${user.data.username}` : "Dockhunt";
 
   return (
@@ -31,7 +34,9 @@ export default function UserPage() {
         <title>{title}</title>
         <meta
           name={"og:image"}
-          content={`/api/og?username=${username}`}
+          content={`/api/og?username=${username}&${appIconUrls
+            ?.map((url) => `icon=${url}`)
+            .join("&")}`}
           key={"opengraph-image"}
         />
         <meta name={"twitter:title"} content={title} key={"twitter-title"} />
