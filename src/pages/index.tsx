@@ -57,6 +57,7 @@ const Home: NextPage = () => {
               ))
             : "Loading..."}
         </div>
+
         <h3 className="mt-24 mb-8 text-3xl font-semibold">Latest docks</h3>
         <div className="flex flex-col gap-10 md:gap-16">
           <AddDockCard />

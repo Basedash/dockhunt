@@ -80,11 +80,11 @@ export default function AppPage() {
         </div>
 
         <div className="w-full py-24">
-          <h2 className="mb-12 text-3xl font-semibold">
+          <h3 className="mb-8 text-3xl font-semibold">
             Docked by {app.data.docks.length}{" "}
             {app.data.docks.length === 1 ? "Dockhunter" : "Dockhunters"}
-          </h2>
-          <div className="flex flex-col gap-20">
+          </h3>
+          <div className="flex flex-col gap-10 md:gap-16">
             {app.data.docks.map((dock) => (
               <DockCard key={dock.id} dock={dock} />
             ))}
