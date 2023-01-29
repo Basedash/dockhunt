@@ -32,7 +32,7 @@ export default function handler(req: NextRequest, res: NextApiResponse) {
     const username = hasUsername
       ? searchParams.get("username")?.slice(0, 100)
       : "Dockhunt";
-    const appIcons = searchParams.getAll("icon").splice(0, 5);
+    const appIcons = searchParams.getAll("icon");
     const avatarUrl = searchParams.get("avatar");
 
     const iconSize = getIconSize(appIcons.length);
