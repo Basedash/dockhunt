@@ -8,9 +8,11 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { api } from "../utils/api";
 
 export const MenuBar = () => {
   const { data: sessionData } = useSession();
+  const user = api.users.getOne.useQuery({ id: sessionData?.user?.id ?? "" });
 
   const [date, setDate] = useState(new Date());
 
@@ -30,7 +32,7 @@ export const MenuBar = () => {
           Dockhunt
         </Link>
         <Link className="hidden md:block" href="/add-dock">
-          Add your dock
+          {user.data?.dock ? "Update your dock" : "Add your dock"}
         </Link>
         <a href="https://www.basedash.com" target="_blank" rel="noreferrer">
           Made by Basedash
@@ -58,7 +60,7 @@ export const MenuBar = () => {
           <Image src={twitter} alt="Twitter" height="16" />
         </a>
         <a
-          href="https://github.com/Basedash/dockhunt"
+          href="https://github.com/Basedash/dockhunt-cli"
           target="_blank"
           rel="noreferrer"
         >

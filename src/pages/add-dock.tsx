@@ -35,7 +35,7 @@ const AddDock = () => {
           alt={"Pinned vs recent dock items"}
         />
         <a
-          href="https://github.com/Basedash/dockhunt"
+          href="https://github.com/Basedash/dockhunt-cli"
           target="_blank"
           rel="noreferrer"
           className="text-xl hover:underline"
