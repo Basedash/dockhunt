@@ -74,7 +74,7 @@ export default function UserPage() {
               </div>
             </div>
 
-            <div className="absolute bottom-10">
+            <div className="absolute bottom-10 max-w-full px-4">
               {user.data.dock && (
                 <Dock
                   apps={user.data.dock.dockItems.map(

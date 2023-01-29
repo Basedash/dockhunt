@@ -16,18 +16,18 @@ const Home: NextPage = () => {
       <Head>
         <title>Dockhunt</title>
         <meta name={"og:title"} content={"Dockhunt"} key={"opengraph-title"} />
-        <meta name={"twitter:title"} content={"Dockhunt"} key={"twitter-title"} />
+        <meta
+          name={"twitter:title"}
+          content={"Dockhunt"}
+          key={"twitter-title"}
+        />
         <meta
           name="description"
           content="Discover the apps everyone is docking about"
         />
       </Head>
-      <div
-        className={
-          "w-screen max-w-[80rem] overflow-hidden px-12 py-24 md:px-20"
-        }
-      >
-        <h2 className={"mb-12 text-3xl"}>Featured</h2>
+      <div className="w-screen max-w-[80rem] overflow-hidden px-6 py-24 md:px-20">
+        <h2 className="mb-12 text-3xl font-semibold">Featured docks</h2>
         <div className="flex flex-col gap-20">
           {featuredDocks.data
             ? featuredDocks.data.map((dock) => (
@@ -35,7 +35,7 @@ const Home: NextPage = () => {
               ))
             : "Loading..."}
         </div>
-        <h2 className={"mt-24 mb-12 text-3xl"}>Latest</h2>
+        <h2 className="mt-24 mb-12 text-3xl font-semibold">Latest docks</h2>
         <div className="flex flex-col gap-20">
           {latestDocks.data
             ? latestDocks.data.map((dock) => (

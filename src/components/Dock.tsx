@@ -61,7 +61,7 @@ const DockItem = ({ app }: { app: App }) => {
         </Link>
       </Tooltip.Trigger>
       <Tooltip.Portal>
-        <Tooltip.Content sideOffset={10}>
+        <Tooltip.Content sideOffset={10} className="z-20">
           <div
             className={
               "rounded-[4px] border border-[#49494B] bg-[#272728] py-[4px] px-[10px] text-xs text-white"

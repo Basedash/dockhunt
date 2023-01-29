@@ -50,7 +50,7 @@ export default function AppPage() {
             height="150"
           />
         )}
-        <h1 className="mt-2 text-[40px] font-black">{app.data.app.name}</h1>
+        <h1 className="mt-2 text-3xl font-semibold">{app.data.app.name}</h1>
         <p className="mt-3 text-gray-300">{app.data.app.description}</p>
         <div className="mt-2 flex gap-4">
           {app.data.app.websiteUrl && (
@@ -75,10 +75,15 @@ export default function AppPage() {
           )}
         </div>
 
-        <div className="flex w-screen max-w-[80rem] flex-col gap-20 overflow-hidden px-20 py-24">
-          {app.data.docks.map((dock) => (
-            <DockCard key={dock.id} dock={dock} />
-          ))}
+        <div className="w-screen max-w-[80rem] overflow-hidden px-6 py-24 md:px-20">
+          <h2 className="mb-12 text-3xl font-semibold">
+            Used by {app.data.docks.length} Dockhunters
+          </h2>
+          <div className="flex flex-col gap-20">
+            {app.data.docks.map((dock) => (
+              <DockCard key={dock.id} dock={dock} />
+            ))}
+          </div>
         </div>
       </div>
     </>

@@ -23,13 +23,18 @@ export const MenuBar = () => {
   }, []);
 
   return (
-    <div className="fixed z-20 flex w-full items-center justify-between bg-gray-800/30 px-4 py-1 text-sm backdrop-blur-3xl">
+    <div className="fixed z-20 flex w-full flex-col items-center justify-between bg-gray-800/30 px-4 py-1 text-sm backdrop-blur-3xl md:flex-row">
       <div className="flex items-center gap-4">
         <Link className="flex gap-4 font-bold" href="/">
           <Image src={dockhunt} alt="Dockhunt" height="16" />
           Dockhunt
         </Link>
-        <Link href="/add-dock">Add your dock</Link>
+        <Link className="hidden md:block" href="/add-dock">
+          Add your dock
+        </Link>
+        <a href="https://www.basedash.com" target="_blank" rel="noreferrer">
+          Made by Basedash
+        </a>
         <button
           onClick={
             sessionData
@@ -39,9 +44,6 @@ export const MenuBar = () => {
         >
           {sessionData ? "Log out" : "Log in"}
         </button>
-        <a href="https://www.basedash.com" target="_blank" rel="noreferrer">
-          Made by Basedash
-        </a>
       </div>
 
       <div className="flex items-center gap-4">
@@ -70,7 +72,9 @@ export const MenuBar = () => {
         >
           <Image src={npm} alt="npm" height="20" />
         </a>
-        <div className="tabular-nums">{format(date, "eee MMM d p")}</div>
+        <div className="hidden tabular-nums md:block">
+          {format(date, "eee MMM d p")}
+        </div>
         {sessionData && sessionData.user && (
           <Link href={`/users/${sessionData.user.username}`}>
             {sessionData.user.name}
