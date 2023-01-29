@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import type { App } from "@prisma/client";
 import Link from "next/link";
 import * as Tooltip from "@radix-ui/react-tooltip";
+import { placeholderImageUrl } from "utils/constants";
 
 const DockItem = ({ app }: { app: App }) => {
   const variants = {
@@ -54,10 +55,7 @@ const DockItem = ({ app }: { app: App }) => {
               whileHover="hover"
               initial="initial"
               className={"absolute"}
-              src={
-                app.iconUrl ??
-                "https://dockhunt-images.nyc3.cdn.digitaloceanspaces.com/placeholder.png"
-              }
+              src={app.iconUrl ?? placeholderImageUrl}
             />
           </motion.div>
         </Link>

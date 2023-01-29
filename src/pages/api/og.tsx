@@ -6,6 +6,24 @@ export const config = {
   runtime: "experimental-edge",
 };
 
+const getIconSize = (numberOfIcons: number): number => {
+  if (numberOfIcons <= 5) {
+    return 120;
+  } else if (numberOfIcons <= 10) {
+    return 90;
+  } else if (numberOfIcons <= 15) {
+    return 70;
+  } else if (numberOfIcons <= 20) {
+    return 60;
+  } else if (numberOfIcons <= 25) {
+    return 50;
+  } else if (numberOfIcons <= 35) {
+    return 40;
+  } else {
+    return 30
+  }
+}
+
 export default function handler(req: NextRequest, res: NextApiResponse) {
   try {
     const { searchParams } = new URL(req.url);
@@ -14,9 +32,10 @@ export default function handler(req: NextRequest, res: NextApiResponse) {
     const username = hasUsername
       ? searchParams.get("username")?.slice(0, 100)
       : "Dockhunt";
-    const appIcons = searchParams.getAll("icon");
+    const appIcons = searchParams.getAll("icon").splice(0, 5);
+    const avatarUrl = searchParams.get("avatar");
 
-    console.log("appIcons", appIcons);
+    const iconSize = getIconSize(appIcons.length);
 
     return new ImageResponse(
       (
@@ -24,7 +43,7 @@ export default function handler(req: NextRequest, res: NextApiResponse) {
           style={{
             backgroundImage: `url("${
               process.env.NEXTAUTH_URL as string
-            }/og-wallpaper.jpg")`,
+            }/og-wallpaper-monterey.jpg")`,
             backgroundSize: "cover",
             width: "1200px",
             height: "630px",
@@ -34,6 +53,7 @@ export default function handler(req: NextRequest, res: NextApiResponse) {
             justifyContent: "center",
             flexDirection: "column",
             flexWrap: "nowrap",
+            position: 'relative'
           }}
         >
           <div
@@ -42,40 +62,36 @@ export default function handler(req: NextRequest, res: NextApiResponse) {
               alignItems: "center",
               justifyContent: "center",
               justifyItems: "center",
+              marginTop: '100px',
               marginBottom: "16px",
             }}
           >
-            <img
-              src={`${process.env.NEXTAUTH_URL as string}/og-dockhunt.png`}
-              height={126}
-              width={126}
-            />
+            <img src={avatarUrl ?? ''} height={180} width={180} style={{
+              borderRadius: '180px'
+            }} />
           </div>
           <div
             style={{
-              fontSize: 52,
+              fontSize: 30,
               fontStyle: "normal",
-              letterSpacing: "-0.025em",
               color: "white",
-              marginTop: 30,
-              padding: "0 60px",
-              lineHeight: 1.4,
-              whiteSpace: "pre-wrap",
-              border: "1px solid rgba(75,85,99,.6)",
-              backgroundColor: "rgba(31,41,55,.6)",
-              borderRadius: "15px",
             }}
           >
-            {`${username}'s dock`}
+            {`${username}`}
           </div>
           <div
             style={{
               display: "flex",
-              marginTop: 30
+              marginTop: 30,
+              border: "1px solid rgba(75,85,99,.6)",
+              backgroundColor: "rgba(31,41,55,.6)",
+              borderRadius: "15px",
+              marginTop: 'auto',
+              marginBottom: '30px'
             }}
           >
             {appIcons.map((icon) => (
-              <img key={icon} src={icon} height={60} width={60} />
+              <img key={icon} src={icon} height={iconSize} width={iconSize} />
             ))}
           </div>
         </div>

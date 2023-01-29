@@ -34,9 +34,9 @@ export default function UserPage() {
         <title>{title}</title>
         <meta
           name={"og:image"}
-          content={`/api/og?username=${username}&${appIconUrls
-            ?.map((url) => `icon=${url}`)
-            .join("&")}`}
+          content={`/api/og?username=${username}&avatar=${
+            user.data?.avatarUrl
+          }&${appIconUrls?.map((url) => `icon=${url}`).join("&")}`}
           key={"opengraph-image"}
         />
         <meta name={"twitter:title"} content={title} key={"twitter-title"} />
