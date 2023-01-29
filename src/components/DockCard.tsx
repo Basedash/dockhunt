@@ -12,7 +12,7 @@ export function DockCard({
   dock: inferRouterOutputs<AppRouter>["docks"]["getFeatured"][0];
 }) {
   return (
-    <div key={dock.id} className={"flex flex-col"}>
+    <div className="flex flex-col">
       <p className="mb-2 text-sm text-gray-500">
         <a
           className="hover:underline"

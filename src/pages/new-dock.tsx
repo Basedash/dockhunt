@@ -19,7 +19,7 @@ const NewDock = () => {
   const creatingDockRef = useRef(false);
   const createDockMutation = api.docks.createDock.useMutation({
     onSuccess: async () => {
-      await router.replace(`/users/${session?.user?.username ?? ''}`);
+      await router.replace(`/users/${session?.user?.username ?? ""}`);
     },
   });
 
@@ -35,7 +35,7 @@ const NewDock = () => {
   useEffect(() => {
     const handleGenerateDock = () => {
       if (session && creatingDockRef.current === false) {
-        creatingDockRef.current = true
+        creatingDockRef.current = true;
         createDockMutation.mutate({
           apps: appNames,
         });
@@ -47,7 +47,7 @@ const NewDock = () => {
   return (
     <>
       <Head>
-        <title>New dock | Dockhunt</title>
+        <title>Dockhunt | New dock</title>
         <meta name="description" content="Save your dock" />
         <link rel="icon" href="/favicon.png" />
       </Head>

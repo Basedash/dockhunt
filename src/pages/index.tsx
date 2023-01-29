@@ -6,6 +6,7 @@ import { api } from "../utils/api";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { DockCard } from "components/DockCard";
+import { AddDockCard } from "components/AddDockCard";
 
 const Home: NextPage = () => {
   const featuredDocks = api.docks.getFeatured.useQuery();
@@ -37,6 +38,8 @@ const Home: NextPage = () => {
         </div>
         <h2 className="mt-24 mb-12 text-3xl font-semibold">Latest docks</h2>
         <div className="flex flex-col gap-20">
+          <AddDockCard />
+
           {latestDocks.data
             ? latestDocks.data.map((dock) => (
                 <DockCard key={dock.id} dock={dock} />
