@@ -1,6 +1,7 @@
 import Head from "next/head";
 import pinnedDocks from "images/pinned.jpg";
 import Image from "next/image";
+import Link from "next/link";
 
 const AddDock = () => {
   return (
@@ -30,7 +31,8 @@ const AddDock = () => {
           <li>You will be asked to authenticate with Twitter</li>
         </ul>
         <p className="mb-8 text-xl">
-          To add your own dock, run the following command in your terminal:
+          To add your own dock, run the following command in your{" "}
+          <Link href="/apps/Terminal">terminal</Link>:
         </p>
         <code className="mb-8 w-full rounded border bg-black p-4">
           npx dockhunt
