@@ -34,7 +34,7 @@ export function DockCard({
             alt={`${dock.user.name}'s avatar`}
             width={80}
             height={80}
-            className={"rounded-full"}
+            className="rounded-full border border-solid border-gray-600/60"
           />
         </div>
 
