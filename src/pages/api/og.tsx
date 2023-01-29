@@ -62,7 +62,7 @@ export default function handler(req: NextRequest, res: NextApiResponse) {
               alignItems: "center",
               justifyContent: "center",
               justifyItems: "center",
-              marginTop: '100px',
+              marginTop: '160px',
               marginBottom: "16px",
             }}
           >
@@ -77,7 +77,7 @@ export default function handler(req: NextRequest, res: NextApiResponse) {
               color: "white",
             }}
           >
-            {`${username}`}
+            {`@${username}`}
           </div>
           <div
             style={{
