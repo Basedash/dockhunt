@@ -34,6 +34,8 @@ export default function UserPage() {
           content={`${env.NEXT_PUBLIC_URL}/api/og?username=${username}`}
           key={"opengraph-image"}
         />
+        <meta name="twitter:image" content={`${env.NEXT_PUBLIC_URL}/api/og?username=${username}`} />
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <div className="flex h-screen w-screen flex-col items-center justify-center bg-monterey bg-cover">
         {user.data ? (
