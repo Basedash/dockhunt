@@ -8,6 +8,7 @@ import { api } from "../utils/api";
 
 import "../styles/globals.css";
 import { MenuBar } from "components/MenuBar";
+import { env } from "env/client.mjs";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -23,8 +24,14 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <link rel="icon" href="/favicon.png" />
         <meta
           name={"og:image"}
-          content={"/opengraph.png"}
+          content={`${env.NEXT_PUBLIC_URL}/opengraph.png`}
           key={"opengraph-image"}
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:image"
+          content={`${env.NEXT_PUBLIC_URL}/opengraph.png`}
+          key={"twitter-image"}
         />
       </Head>
       <main className="flex min-h-screen flex-col items-center bg-neutral-900 text-white">

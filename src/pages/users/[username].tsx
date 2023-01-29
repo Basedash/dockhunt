@@ -23,18 +23,23 @@ export default function UserPage() {
     );
   }
 
+  const title = user.data ? `Dockhunt | ${user.data.username}` : "Dockhunt";
+
   return (
     <>
       <Head>
-        <title>
-          {user.data ? `Dockhunt | ${user.data.username}` : "Dockhunt"}
-        </title>
+        <title>{title}</title>
         <meta
           name={"og:image"}
           content={`${env.NEXT_PUBLIC_URL}/api/og?username=${username}`}
           key={"opengraph-image"}
         />
-        <meta name="twitter:image" content={`${env.NEXT_PUBLIC_URL}/api/og?username=${username}`} />
+        <meta name={"twitter:title"} content={title} key={"twitter-title"} />
+        <meta
+          name="twitter:image"
+          content={`${env.NEXT_PUBLIC_URL}/api/og?username=${username}`}
+          key={"twitter-image"}
+        />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <div className="flex h-screen w-screen flex-col items-center justify-center bg-monterey bg-cover">
