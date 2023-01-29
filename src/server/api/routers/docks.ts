@@ -37,10 +37,8 @@ export const docksRouter = createTRPCRouter({
           orderBy: { position: "asc" },
         },
       },
-      orderBy: [
-        { createdAt: "desc" },
-      ],
-      take: 6
+      orderBy: [{ createdAt: "desc" }],
+      take: 6,
     });
   }),
   createDock: protectedProcedure

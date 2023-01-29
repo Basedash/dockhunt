@@ -26,6 +26,8 @@ model Dock {
     userId    String     @unique
     user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
     dockItems DockItem[]
+
+    @@index([featured])
 }
 
 model DockItem {
