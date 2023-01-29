@@ -24,13 +24,13 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <link rel="icon" href="/favicon.png" />
         <meta
           name={"og:image"}
-          content={`${env.NEXT_PUBLIC_URL}/opengraph.png`}
+          content={`/opengraph.png`}
           key={"opengraph-image"}
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:image"
-          content={`${env.NEXT_PUBLIC_URL}/opengraph.png`}
+          content={`/opengraph.png`}
           key={"twitter-image"}
         />
       </Head>
