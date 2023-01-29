@@ -58,17 +58,17 @@ export default function AppPage() {
           <div className="mt-4 flex gap-4">
             {app.data.app.websiteUrl && (
               <a
-                className="text-gray-300 hover:underline"
+                className="text-blue-400 hover:underline"
                 href={app.data.app.websiteUrl}
                 target="_blank"
                 rel="noreferrer"
               >
-                Website
+                {app.data.app.websiteUrl.split("//").at(-1)?.split("/").at(0)}
               </a>
             )}
             {app.data.app.twitterUrl && (
               <a
-                className="text-gray-300 hover:underline"
+                className="text-blue-400 hover:underline"
                 href={app.data.app.twitterUrl}
                 target="_blank"
                 rel="noreferrer"
