@@ -52,8 +52,10 @@ export default function AppPage() {
             />
           )}
           <h1 className="mt-2 text-3xl font-semibold">{app.data.app.name}</h1>
-          <p className="mt-3 text-gray-300">{app.data.app.description}</p>
-          <div className="mt-2 flex gap-4">
+          <p className="mt-3 max-w-2xl whitespace-pre-wrap text-center text-gray-300">
+            {app.data.app.description}
+          </p>
+          <div className="mt-4 flex gap-4">
             {app.data.app.websiteUrl && (
               <a
                 className="text-gray-300 hover:underline"

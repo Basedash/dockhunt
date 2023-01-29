@@ -31,9 +31,7 @@ export const MenuBar = () => {
           <Image src={dockhunt} alt="Dockhunt" height="16" />
           Dockhunt
         </Link>
-        <a href="https://www.basedash.com" target="_blank" rel="noreferrer">
-          Made by Basedash
-        </a>
+        <Link href="/apps/Basedash">Made by Basedash</Link>
         <Link className="hidden md:block" href="/add-dock">
           {user.data?.dock ? "Update your dock" : "Add your dock"}
         </Link>
