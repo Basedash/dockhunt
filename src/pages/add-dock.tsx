@@ -11,7 +11,7 @@ const AddDock = () => {
         <link rel="icon" href="/favicon.png" />
       </Head>
       <div className="flex min-h-screen max-w-[800px] flex-col items-start justify-center px-8 py-24">
-        <h1 className="mb-8 text-3xl font-bold">Add your own dock</h1>
+        <h1 className="mb-8 text-3xl font-semibold">Add your own dock</h1>
         <h3 className="mb-2 text-xl">Prerequisites</h3>
         <ul className="mb-8 list-disc pl-8 text-xl">
           <li>You must be using macOS</li>
