@@ -24,6 +24,7 @@ export const usersRouter = createTRPCRouter({
                 include: {
                   app: true,
                 },
+                orderBy: { position: "asc" },
               },
             },
           },
