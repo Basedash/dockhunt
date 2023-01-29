@@ -31,13 +31,13 @@ export default function UserPage() {
         <title>{title}</title>
         <meta
           name={"og:image"}
-          content={`${env.NEXT_PUBLIC_URL}/api/og?username=${username}`}
+          content={`/api/og?username=${username}`}
           key={"opengraph-image"}
         />
         <meta name={"twitter:title"} content={title} key={"twitter-title"} />
         <meta
           name="twitter:image"
-          content={`${env.NEXT_PUBLIC_URL}/api/og?username=${username}`}
+          content={`/api/og?username=${username}`}
           key={"twitter-image"}
         />
         <meta name="twitter:card" content="summary_large_image" />
