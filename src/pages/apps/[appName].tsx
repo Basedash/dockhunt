@@ -40,7 +40,7 @@ export default function AppPage() {
       <Head>
         <title>Dockhunt | {app.data.app.name}</title>
       </Head>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center px-6 md:px-20">
         {app.data.app.iconUrl && (
           <Image
             src={app.data.app.iconUrl}
@@ -75,7 +75,7 @@ export default function AppPage() {
           )}
         </div>
 
-        <div className="w-screen max-w-[80rem] overflow-hidden px-6 py-24 md:px-20">
+        <div className="w-full max-w-[80rem] overflow-hidden py-24">
           <h2 className="mb-12 text-3xl font-semibold">
             Used by {app.data.docks.length} Dockhunters
           </h2>
