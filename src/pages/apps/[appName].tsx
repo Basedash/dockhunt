@@ -52,7 +52,7 @@ export default function AppPage() {
             />
           )}
           <h1 className="mt-2 text-3xl font-semibold">{app.data.app.name}</h1>
-          <p className="mt-3 max-w-2xl whitespace-pre-wrap text-center leading-none text-gray-300">
+          <p className="mt-3 max-w-2xl whitespace-pre-wrap text-center leading-normal text-gray-300">
             {app.data.app.description}
           </p>
           <div className="mt-4 flex gap-4">
