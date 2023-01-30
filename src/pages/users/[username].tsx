@@ -1,12 +1,15 @@
 import { Dock } from "components/Dock";
+import { env } from "env/client.mjs";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { api } from "../../utils/api";
+import { useSession } from "next-auth/react";
 
 export default function UserPage() {
   const router = useRouter();
   const username = router.query.username as string | null;
+  const { data: sessionData } = useSession();
 
   if (!username) return null;
 
@@ -50,7 +53,22 @@ export default function UserPage() {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
-      <div className="flex h-screen w-screen flex-col items-center justify-center bg-monterey bg-cover">
+      <div className="relative flex h-screen w-screen flex-col items-center justify-center bg-monterey bg-cover">
+        {/* Only show the share button for the dock of the currently logged-in user */}
+        {sessionData?.user?.username === username && (
+          <a
+            className={
+              "absolute top-[40px] left-[15px] rounded-md border border-yellow-600 bg-yellow-400 px-2 py-0.5 font-medium text-black transition-colors duration-200 hover:bg-yellow-300"
+            }
+            href={`https://twitter.com/intent/tweet?text=See%20my%20mac%20dock%20at%20${encodeURIComponent(
+              env.NEXT_PUBLIC_URL
+            )}${encodeURIComponent(router.asPath)}`}
+            target={"_blank"}
+            rel="noreferrer"
+          >
+            share
+          </a>
+        )}
         <div className="flex flex-col items-center pb-20">
           {user.data.avatarUrl && (
             <Image
