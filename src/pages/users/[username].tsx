@@ -51,7 +51,7 @@ export default function UserPage() {
           content={ogImageLink}
           key={"twitter-image"}
         />
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:card" content="summary" />
       </Head>
 
       <div className="relative flex h-screen w-screen flex-col items-center justify-center bg-monterey bg-cover">
