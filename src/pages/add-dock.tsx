@@ -2,6 +2,7 @@ import Head from "next/head";
 import pinnedDocks from "images/pinned.jpg";
 import Image from "next/image";
 import Link from "next/link";
+import { desktopAppDownloadLink } from "utils/constants";
 
 const AddDock = () => {
   return (
@@ -13,9 +14,20 @@ const AddDock = () => {
       </Head>
       <div className="flex min-h-screen max-w-[800px] flex-col items-start justify-center px-8 py-24">
         <h1 className="mb-8 text-3xl font-semibold">Add your own dock</h1>
+        <h2 className={'text-2xl mb-4'}>Desktop app method (preferred)</h2>
         <h3 className="mb-2 text-xl">Prerequisites</h3>
         <ul className="mb-8 list-disc pl-8 text-xl">
-          <li>You must be using macOS</li>
+          <li>macOS 11+ (Big Sur and above)</li>
+        </ul>
+
+        <p className="mb-2 text-xl mb-4">Download the desktop app, unzip it, and move the app into your applications directory. Once in your applications directory you will be able to run the app.</p>
+
+        <a className="rounded-full bg-blue-700 px-4 py-2 hover:bg-blue-600 mb-8" download href={desktopAppDownloadLink}>Download desktop app</a>
+
+        <h2 className={'text-2xl mb-4'}>CLI method</h2>
+        <h3 className="mb-2 text-xl">Prerequisites</h3>
+        <ul className="mb-8 list-disc pl-8 text-xl">
+          <li>macOS 11+ (Big Sur and above)</li>
           <li>
             You must have{" "}
             <a
@@ -44,7 +56,7 @@ const AddDock = () => {
           <li>Create a dock on this website</li>
         </ol>
 
-        <div className="mb-8 flex flex-col items-start text-xl">
+        <div className="mb-4 flex flex-col items-start text-xl">
           <a
             href="https://github.com/Basedash/dockhunt-cli"
             target="_blank"
@@ -62,6 +74,9 @@ const AddDock = () => {
             View package on npm
           </a>
         </div>
+
+        <hr className={'w-full my-8'} />
+
 
         <p className="mb-8 text-xl">
           Dockhunt will only use the apps that are pinned to your dock. Apps can

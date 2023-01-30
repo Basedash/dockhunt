@@ -30,6 +30,11 @@ export default function UserPage() {
     .filter((url): url is string => url !== null);
 
   const title = user.data ? `Dockhunt | ${user.data.username}` : "Dockhunt";
+  const ogImageLink = `/api/og?username=${username}&avatar=${encodeURIComponent(
+    user.data?.avatarUrl ?? ""
+  )}&${appIconUrls
+    ?.map((url) => `icon=${encodeURIComponent(url)}`)
+    .join("&")}`;
 
   return (
     <>
@@ -37,17 +42,13 @@ export default function UserPage() {
         <title>{title}</title>
         <meta
           name={"og:image"}
-          content={`/api/og?username=${username}&avatar=${encodeURIComponent(
-            user.data?.avatarUrl ?? ""
-          )}&${appIconUrls
-            ?.map((url) => `icon=${encodeURIComponent(url)}`)
-            .join("&")}`}
+          content={ogImageLink}
           key={"opengraph-image"}
         />
         <meta name={"twitter:title"} content={title} key={"twitter-title"} />
         <meta
           name="twitter:image"
-          content={`/api/og?username=${username}`}
+          content={ogImageLink}
           key={"twitter-image"}
         />
         <meta name="twitter:card" content="summary_large_image" />

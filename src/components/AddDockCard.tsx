@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { api } from "utils/api";
+import { desktopAppDownloadLink } from "utils/constants";
 
 export function AddDockCard() {
   const { data: sessionData } = useSession();
@@ -23,6 +24,9 @@ export function AddDockCard() {
         <code className="my-4 rounded border border-gray-100/60 bg-gray-900/70 p-4 backdrop-blur">
           npx dockhunt
         </code>
+        <p className="hidden text-md text-center sm:block mb-3">
+          Or install the <a className={'text-blue-400 hover:underline'} href={desktopAppDownloadLink}>desktop app</a>.
+        </p>
         <Link href="/add-dock" className="text-blue-400 hover:underline">
           More details &rarr;
         </Link>
