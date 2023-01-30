@@ -28,7 +28,7 @@ export default function UserPage() {
     user.data?.avatarUrl ?? ""
   )}&${appIconUrls
     ?.map((url) => `icon=${encodeURIComponent(url)}`)
-    .join("&")}`;
+    .join("&")}&v1.0.0`;
 
   const description = `${user.data.name}'s dock on Dockhunt`;
 
