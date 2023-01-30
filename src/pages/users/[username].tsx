@@ -30,7 +30,7 @@ export default function UserPage() {
     .filter((url): url is string => url !== null);
 
   const title = user.data ? `Dockhunt | ${user.data.username}` : "Dockhunt";
-  const ogImageLink = `/api/og?username=${username}&avatar=${encodeURIComponent(
+  const ogImageLink = `${env.NEXT_PUBLIC_URL}/api/og?username=${username}&avatar=${encodeURIComponent(
     user.data?.avatarUrl ?? ""
   )}&${appIconUrls
     ?.map((url) => `icon=${encodeURIComponent(url)}`)
