@@ -28,7 +28,10 @@ export const authOptions: NextAuthOptions = {
       version: "2.0",
       userinfo: {
         url: "https://api.twitter.com/2/users/me",
-        params: { "user.fields": "profile_image_url,public_metrics" },
+        params: {
+          "user.fields":
+            "description,url,entities,profile_image_url,public_metrics",
+        },
       },
       profile(profile: {
         data: TwitterProfile["data"] & {
@@ -40,7 +43,9 @@ export const authOptions: NextAuthOptions = {
           id: profile.data.id,
           name: profile.data.name,
           description: profile.data.description,
-          url: profile.data.url,
+          url:
+            profile.data.entities?.url.urls[0]?.expanded_url ??
+            profile.data.url,
           twitterFollowerCount: profile.data.public_metrics.followers_count,
           username: profile.data.username,
           avatarUrl: profile.data.profile_image_url.replace(
