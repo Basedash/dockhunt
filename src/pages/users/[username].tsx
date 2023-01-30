@@ -16,13 +16,7 @@ export default function UserPage() {
   const user = api.users.getOne.useQuery({ username: username });
 
   if (!user.data) {
-    return (
-      <>
-        <Head>
-          <title>Dockhunt | {username}</title>
-        </Head>
-      </>
-    );
+    return null;
   }
 
   const appIconUrls = user.data.dock?.dockItems
@@ -36,6 +30,8 @@ export default function UserPage() {
     ?.map((url) => `icon=${encodeURIComponent(url)}`)
     .join("&")}`;
 
+  const description = `${user.data.name}'s dock on Dockhunt`;
+
   return (
     <>
       <Head>
@@ -45,7 +41,16 @@ export default function UserPage() {
           content={ogImageLink}
           key={"opengraph-image"}
         />
+        <meta
+          name={"og:image:height"}
+          content={"630"}
+        />
+        <meta
+          name={"og:image:width"}
+          content={"1200"}
+        />
         <meta name={"twitter:title"} content={title} key={"twitter-title"} />
+        <meta name={"twitter:description"} content={description} key={"twitter-description"} />
         <meta
           name="twitter:image"
           content={ogImageLink}

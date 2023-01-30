@@ -34,6 +34,15 @@ const MyApp: AppType<{ session: Session | null }> = ({
             content={`/opengraph.png`}
             key={"twitter-image"}
           />
+          <meta
+            name="twitter:description"
+            content={`Discover the apps everyone is docking about`}
+            key={"twitter-description"}
+          />
+          <meta
+            name="twitter:site"
+            content={'dockhuntapp'}
+          />
         </Head>
         <main className="flex min-h-screen flex-col items-center bg-neutral-900 text-white">
           <MenuBar />
