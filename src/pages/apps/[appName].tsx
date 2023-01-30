@@ -82,7 +82,7 @@ export default function AppPage() {
         <div className="w-full py-24">
           <h3 className="mb-8 text-3xl font-semibold">
             Docked by {app.data.docks.length}{" "}
-            {app.data.docks.length === 1 ? "Dockhunter" : "Dockhunters"}
+            {app.data.docks.length === 1 ? "person" : "people"}
           </h3>
           <div className="flex flex-col gap-10 md:gap-16">
             {app.data.docks.map((dock) => (
