@@ -1,6 +1,6 @@
 import { ImageResponse } from "@vercel/og";
-import { NextRequest } from "next/server";
-import { NextApiResponse } from "next";
+import type { NextRequest } from "next/server";
+import type { NextApiResponse } from "next";
 
 export const config = {
   runtime: "experimental-edge",
@@ -20,9 +20,9 @@ const getIconSize = (numberOfIcons: number): number => {
   } else if (numberOfIcons <= 35) {
     return 40;
   } else {
-    return 30
+    return 30;
   }
-}
+};
 
 export default function handler(req: NextRequest, res: NextApiResponse) {
   try {
@@ -53,7 +53,7 @@ export default function handler(req: NextRequest, res: NextApiResponse) {
             justifyContent: "center",
             flexDirection: "column",
             flexWrap: "nowrap",
-            position: 'relative'
+            position: "relative",
           }}
         >
           <div
@@ -62,13 +62,18 @@ export default function handler(req: NextRequest, res: NextApiResponse) {
               alignItems: "center",
               justifyContent: "center",
               justifyItems: "center",
-              marginTop: '160px',
+              marginTop: "160px",
               marginBottom: "16px",
             }}
           >
-            <img src={avatarUrl ?? ''} height={180} width={180} style={{
-              borderRadius: '180px'
-            }} />
+            <img
+              src={avatarUrl ?? ""}
+              height={180}
+              width={180}
+              style={{
+                borderRadius: "180px",
+              }}
+            />
           </div>
           <div
             style={{
@@ -85,8 +90,8 @@ export default function handler(req: NextRequest, res: NextApiResponse) {
               border: "1px solid rgba(75,85,99,.6)",
               backgroundColor: "rgba(31,41,55,.6)",
               borderRadius: "15px",
-              marginTop: 'auto',
-              marginBottom: '30px'
+              marginTop: "auto",
+              marginBottom: "30px",
             }}
           >
             {appIcons.map((icon) => (
