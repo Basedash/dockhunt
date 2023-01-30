@@ -73,6 +73,7 @@ model User {
     username             String    @unique // From Twitter
     name                 String // From Twitter
     description          String? // From Twitter
+    url                  String? // From Twitter
     accounts             Account[]
     sessions             Session[]
     email                String?   @unique

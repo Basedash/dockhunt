@@ -17,6 +17,7 @@ export const usersRouter = createTRPCRouter({
           username: true,
           name: true,
           description: true,
+          url: true,
           avatarUrl: true,
           dock: {
             include: {

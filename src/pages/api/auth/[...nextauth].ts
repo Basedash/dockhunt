@@ -14,7 +14,7 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         session.user.id = user.id;
         session.user.image = user.avatarUrl;
-        session.user.username = user.username
+        session.user.username = user.username;
       }
       return session;
     },
@@ -40,6 +40,7 @@ export const authOptions: NextAuthOptions = {
           id: profile.data.id,
           name: profile.data.name,
           description: profile.data.description,
+          url: profile.data.url,
           twitterFollowerCount: profile.data.public_metrics.followers_count,
           username: profile.data.username,
           avatarUrl: profile.data.profile_image_url.replace(

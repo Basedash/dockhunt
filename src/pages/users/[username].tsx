@@ -47,46 +47,51 @@ export default function UserPage() {
         />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <div className="flex h-screen w-screen flex-col items-center justify-center bg-monterey bg-cover">
-        {user.data ? (
-          <>
-            <div className="flex flex-col items-center pb-20">
-              {user.data.avatarUrl && (
-                <Image
-                  src={user.data.avatarUrl}
-                  alt={`${user.data.name} avatar`}
-                  className="rounded-full"
-                  width="150"
-                  height="150"
-                />
-              )}
-              <h1 className="mt-2 text-2xl">{user.data.name}</h1>
-              <p className="mt-3 text-gray-300">{user.data.description}</p>
-              <div className="mt-2 flex gap-4">
-                <a
-                  className="text-gray-300 hover:underline"
-                  href={`https://twitter.com/${username}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  @{username}
-                </a>
-              </div>
-            </div>
 
-            <div className="absolute bottom-10 max-w-full px-4">
-              {user.data.dock && (
-                <Dock
-                  apps={user.data.dock.dockItems.map(
-                    (dockItem) => dockItem.app
-                  )}
-                />
-              )}
-            </div>
-          </>
-        ) : (
-          <span>Loading...</span>
-        )}
+      <div className="flex h-screen w-screen flex-col items-center justify-center bg-monterey bg-cover">
+        <div className="flex flex-col items-center pb-20">
+          {user.data.avatarUrl && (
+            <Image
+              src={user.data.avatarUrl}
+              alt={`${user.data.name} avatar`}
+              className="rounded-full"
+              width="150"
+              height="150"
+            />
+          )}
+          <h1 className="mt-2 text-2xl">{user.data.name}</h1>
+          <p className="mt-3 max-w-2xl whitespace-pre-wrap text-center leading-none text-gray-300">
+            {user.data.description}
+          </p>
+          <div className="mt-4 flex gap-4">
+            {user.data.url && (
+              <a
+                className="text-blue-400 hover:underline"
+                href={user.data.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {user.data.url.split("//").at(-1)?.split("/").at(0)}
+              </a>
+            )}
+            <a
+              className="text-blue-400 hover:underline"
+              href={`https://twitter.com/${username}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              @{username}
+            </a>
+          </div>
+        </div>
+
+        <div className="absolute bottom-10 max-w-full px-4">
+          {user.data.dock && (
+            <Dock
+              apps={user.data.dock.dockItems.map((dockItem) => dockItem.app)}
+            />
+          )}
+        </div>
       </div>
     </>
   );
