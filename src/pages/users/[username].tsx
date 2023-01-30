@@ -60,7 +60,7 @@ export default function UserPage() {
             className={
               "absolute top-[65px] right-[15px] rounded-full bg-[#4999E9] px-4 py-2 hover:bg-[#428AD2] md:top-[45px]"
             }
-            href={`https://twitter.com/intent/tweet?text=See%20my%20mac%20dock%20at%20${encodeURIComponent(
+            href={`https://twitter.com/intent/tweet?text=Check%20out%20my%20dock%20on%20%40dockhuntapp%3A%0A%0A${encodeURIComponent(
               env.NEXT_PUBLIC_URL
             )}${encodeURIComponent(router.asPath)}`}
             target={"_blank"}
