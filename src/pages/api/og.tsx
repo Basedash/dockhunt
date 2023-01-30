@@ -89,9 +89,10 @@ export default function handler(req: NextRequest, res: NextApiResponse) {
               marginBottom: '30px'
             }}
           >
-            {appIcons.map((icon) => (
-              <img key={icon} src={icon} height={iconSize} width={iconSize} />
-            ))}
+            {/*Ignoring for now to test if the images are causing problems */}
+            {/*{appIcons.map((icon) => (*/}
+            {/*  <img key={icon} src={icon} height={iconSize} width={iconSize} />*/}
+            {/*))}*/}
           </div>
         </div>
       ),
