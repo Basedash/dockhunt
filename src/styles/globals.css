@@ -4,6 +4,6 @@
 
 @layer utilities {
 	.fade-lr {
-		mask-image: radial-gradient(circle at center, black calc(100% - 12px), transparent calc(100% - 7px), transparent);
+		mask-image: radial-gradient(circle at center, black calc(100% - 10px), transparent calc(100% - 7px), transparent);
 	}
 }
