@@ -58,7 +58,7 @@ export default function UserPage() {
         {sessionData?.user?.username === username && (
           <a
             className={
-              "absolute top-[40px] left-[15px] rounded-md border border-yellow-600 bg-yellow-400 px-2 py-0.5 font-medium text-black transition-colors duration-200 hover:bg-yellow-300"
+              "absolute top-[65px] right-[15px] rounded-full bg-[#4999E9] px-4 py-2 hover:bg-[#428AD2] md:top-[45px]"
             }
             href={`https://twitter.com/intent/tweet?text=See%20my%20mac%20dock%20at%20${encodeURIComponent(
               env.NEXT_PUBLIC_URL
@@ -66,7 +66,7 @@ export default function UserPage() {
             target={"_blank"}
             rel="noreferrer"
           >
-            share
+            Share on Twitter
           </a>
         )}
         <div className="flex flex-col items-center pb-20">
