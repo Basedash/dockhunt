@@ -44,7 +44,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
             content={'dockhuntapp'}
           />
         </Head>
-        <main className="flex min-h-screen flex-col items-center bg-neutral-900 text-white">
+        <main className="flex min-h-screen flex-col items-center main-bg text-white">
           <MenuBar />
           <Component {...pageProps} />
         </main>

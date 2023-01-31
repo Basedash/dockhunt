@@ -7,3 +7,8 @@
 		mask-image: radial-gradient(circle at center, black calc(100% - 10px), transparent calc(100% - 7px), transparent);
 	}
 }
+
+.main-bg {
+	background: rgb(28,12,32);
+	background: linear-gradient(129deg, rgba(28,12,32,1) 45%, rgba(0,0,0,1) 100%);
+}
