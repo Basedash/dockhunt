@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { api } from "../../utils/api";
+import { BouncingLoader } from "components/BouncingLoader";
 
 export default function AppPage() {
   const router = useRouter();
@@ -19,7 +20,7 @@ export default function AppPage() {
           <title>Dockhunt | {appName}</title>
         </Head>
         <div className="flex h-screen flex-col items-center justify-center">
-          <p className={'text-3xl'}>Loading...</p>
+          <BouncingLoader />
         </div>
       </>
     );

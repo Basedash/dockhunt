@@ -9,6 +9,7 @@ import { DockCard } from "components/DockCard";
 import { AddDockCard } from "components/AddDockCard";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { BouncingLoader } from "components/BouncingLoader";
 
 const Home: NextPage = () => {
   const { data: sessionData } = useSession();
@@ -49,25 +50,28 @@ const Home: NextPage = () => {
           </div>
         )}
 
-        <h3 className="mb-8 text-3xl font-semibold">Featured docks</h3>
-        <div className="flex flex-col gap-10 md:gap-16">
-          {featuredDocks.data
-            ? featuredDocks.data.map((dock) => (
+        {!featuredDocks.data || !latestDocks.data ? (
+          <div className={'h-full w-full flex justify-center items-center mt-40'}>
+          <BouncingLoader />
+          </div>
+        ) : (
+          <>
+            <h3 className="mb-8 text-3xl font-semibold">Featured docks</h3>
+            <div className="flex flex-col gap-10 md:gap-16">
+              {featuredDocks.data.map((dock) => (
                 <DockCard key={dock.id} dock={dock} />
-              ))
-            : "Loading..."}
-        </div>
+              ))}
+            </div>
 
-        <h3 className="mt-24 mb-8 text-3xl font-semibold">Latest docks</h3>
-        <div className="flex flex-col gap-10 md:gap-16">
-          <AddDockCard />
-
-          {latestDocks.data
-            ? latestDocks.data.map((dock) => (
+            <h3 className="mt-24 mb-8 text-3xl font-semibold">Latest docks</h3>
+            <div className="flex flex-col gap-10 md:gap-16">
+              <AddDockCard />
+              {latestDocks.data.map((dock) => (
                 <DockCard key={dock.id} dock={dock} />
-              ))
-            : "Loading..."}
-        </div>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </>
   );
