@@ -35,28 +35,26 @@ const Home: NextPage = () => {
       </Head>
 
       <div className="flex w-screen max-w-[80rem] flex-col px-6 py-24 md:py-32 md:px-20">
-        {!user.data?.dock && (
-          <div className="mb-16 flex flex-col items-center gap-4">
-            <h1 className="text-center text-4xl font-bold">
-              Discover the apps everyone is docking about
-            </h1>
-            <h2 className="text-center text-xl">
-              Share your dock and see who else has docked the apps you use
-            </h2>
-            <Link
-              href="/add-dock"
-              className="rounded-full bg-blue-700 px-4 py-2 hover:bg-blue-600"
-            >
-              Add your dock
-            </Link>
+        <div className="mb-16 flex flex-col items-center gap-4">
+          <h1 className="text-center text-4xl font-bold">
+            Discover the apps everyone is docking about
+          </h1>
+          <h2 className="text-center text-xl">
+            Share your dock and see who else has docked the apps you use
+          </h2>
+          <Link
+            href="/add-dock"
+            className="rounded-full bg-blue-700 px-4 py-2 hover:bg-blue-600"
+          >
+            {!user.data?.dock ? "Add your dock" : "Update your dock"}
+          </Link>
 
-            {dockCount.data && dockCount.data > 0 && (
-              <span className="self-center text-xs uppercase text-gray-400">
-                {dockCount.data} docks on Dockhunt
-              </span>
-            )}
-          </div>
-        )}
+          {dockCount.data && dockCount.data > 0 && (
+            <span className="self-center text-xs uppercase text-gray-400">
+              {dockCount.data} docks on Dockhunt
+            </span>
+          )}
+        </div>
 
         {!featuredDocks.data || !latestDocks.data ? (
           <div
