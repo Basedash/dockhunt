@@ -25,14 +25,16 @@ export const MenuBar = () => {
   }, []);
 
   return (
-    <div className="fixed z-20 flex w-full flex-col items-center justify-between bg-gray-800/30 px-4 py-1 text-sm backdrop-blur-3xl md:flex-row">
+    <div className="fixed z-20 flex w-full flex-col items-center justify-between gap-2 bg-gray-800/30 px-4 py-1 text-sm backdrop-blur-3xl min-[900px]:flex-row min-[900px]:gap-4">
       <div className="flex items-center gap-4">
         <Link className="flex gap-4 font-bold" href="/">
           <Image src={dockhunt} alt="Dockhunt" height="16" />
           Dockhunt
         </Link>
-        <Link href="/apps/Basedash">Made by Basedash</Link>
-        <Link className="hidden md:block" href="/add-dock">
+        <Link className="hidden sm:block" href="/apps/Basedash">
+          Made by Basedash
+        </Link>
+        <Link className="hidden sm:block" href="/add-dock">
           {user.data?.dock ? "Update your dock" : "Add your dock"}
         </Link>
         <button
@@ -72,7 +74,7 @@ export const MenuBar = () => {
         >
           <Image src={npm} alt="npm" height="20" />
         </a>
-        <div className="hidden tabular-nums md:block">
+        <div className="hidden tabular-nums sm:block">
           {format(date, "eee MMM d p")}
         </div>
         {sessionData && sessionData.user && (
