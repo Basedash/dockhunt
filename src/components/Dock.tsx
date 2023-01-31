@@ -83,7 +83,7 @@ export function Dock({ apps }: { apps: App[] }) {
   return (
     <div className="relative">
       {/* Dock background */}
-      <div className="absolute bottom-0 left-0 right-0 h-[80px] max-w-full rounded-[22px] border border-gray-600/60 bg-gray-800/60 backdrop-blur" />
+      <div className="absolute bottom-0 left-0 right-0 h-[80px] max-w-full rounded-[22px] border border-gray-600/60 bg-gray-800/60" />
       {/* Scrollable container */}
       <div className="fade-lr relative flex max-w-full flex-1 overflow-x-auto pt-4">
         {apps.map((app) => (
