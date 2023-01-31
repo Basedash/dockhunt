@@ -41,6 +41,9 @@ export const docksRouter = createTRPCRouter({
       take: 20,
     });
   }),
+  getCount: publicProcedure.query(({ ctx }) => {
+    return ctx.prisma.dock.count();
+  }),
   createDock: protectedProcedure
     .input(
       z.object({

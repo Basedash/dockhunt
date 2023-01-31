@@ -16,6 +16,7 @@ const Home: NextPage = () => {
   const user = api.users.getOne.useQuery({ id: sessionData?.user?.id ?? "" });
   const featuredDocks = api.docks.getFeatured.useQuery();
   const latestDocks = api.docks.getLatest.useQuery();
+  const dockCount = api.docks.getCount.useQuery();
 
   return (
     <>
@@ -32,7 +33,8 @@ const Home: NextPage = () => {
           content="Discover the apps everyone is docking about"
         />
       </Head>
-      <div className="w-screen max-w-[80rem] px-6 py-24 md:py-32 md:px-20">
+
+      <div className="flex w-screen max-w-[80rem] flex-col px-6 py-24 md:py-32 md:px-20">
         {!user.data?.dock && (
           <div className="mb-16 flex flex-col items-center gap-4">
             <h1 className="text-center text-4xl font-bold">
@@ -47,23 +49,31 @@ const Home: NextPage = () => {
             >
               Add your dock
             </Link>
+
+            {dockCount.data && dockCount.data > 0 && (
+              <span className="self-center text-xs uppercase text-gray-400">
+                {dockCount.data} docks on Dockhunt
+              </span>
+            )}
           </div>
         )}
 
         {!featuredDocks.data || !latestDocks.data ? (
-          <div className={'h-full w-full flex justify-center items-center mt-40'}>
-          <BouncingLoader />
+          <div
+            className={"mt-40 flex h-full w-full items-center justify-center"}
+          >
+            <BouncingLoader />
           </div>
         ) : (
           <>
             <h3 className="mb-8 text-3xl font-semibold">Featured docks</h3>
-            <div className="flex flex-col gap-10 md:gap-16">
+            <div className="mb-24 flex flex-col gap-10 md:gap-16">
               {featuredDocks.data.map((dock) => (
                 <DockCard key={dock.id} dock={dock} />
               ))}
             </div>
 
-            <h3 className="mt-24 mb-8 text-3xl font-semibold">Latest docks</h3>
+            <h3 className="mb-8 text-3xl font-semibold">Latest docks</h3>
             <div className="flex flex-col gap-10 md:gap-16">
               <AddDockCard />
               {latestDocks.data.map((dock) => (
