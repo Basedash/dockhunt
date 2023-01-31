@@ -18,11 +18,14 @@ export default function AppPage() {
         <Head>
           <title>Dockhunt | {appName}</title>
         </Head>
+        <div className="flex h-screen flex-col items-center justify-center">
+          <p className={'text-3xl'}>Loading...</p>
+        </div>
       </>
     );
   }
 
-  if (!app.data || !app.data.app) {
+  if (!app.data.app) {
     return (
       <>
         <Head>

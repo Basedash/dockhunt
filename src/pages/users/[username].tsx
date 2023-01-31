@@ -6,10 +6,16 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { api } from "../../utils/api";
+import superjson from "superjson";
+import { createInnerTRPCContext } from "server/api/trpc";
+import { appRouter } from "server/api/root";
+import { createProxySSGHelpers } from "@trpc/react-query/ssg";
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 
-export default function UserPage() {
+export default function UserPage({
+  username,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
-  const username = router.query.username as string | null;
   const { data: sessionData } = useSession();
 
   if (!username) return null;
@@ -123,4 +129,25 @@ export default function UserPage() {
       </div>
     </>
   );
+}
+
+export async function getServerSideProps(
+  context: GetServerSidePropsContext<{ username: string }>,
+) {
+  const ssg = createProxySSGHelpers({
+    router: appRouter,
+    ctx: createInnerTRPCContext(),
+    transformer: superjson,
+  });
+  const username = context.params?.username as string;
+  /*
+   * `prefetch` does not return the result and never throws - if you need that behavior, use `fetch` instead.
+   */
+  await ssg.users.getOne.prefetch({ username });
+  return {
+    props: {
+      trpcState: ssg.dehydrate(),
+      username,
+    },
+  };
 }
