@@ -71,7 +71,7 @@ export default function UserPage() {
             Share on Twitter
           </a>
         )}
-        <div className="flex flex-col items-center pb-20">
+        <div className="flex max-w-[80rem] flex-col items-center px-6 pb-20 md:px-20">
           {user.data.avatarUrl && (
             <Image
               src={user.data.avatarUrl}
