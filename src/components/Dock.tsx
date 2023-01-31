@@ -3,6 +3,9 @@ import type { App } from "@prisma/client";
 import Link from "next/link";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import { placeholderImageUrl } from "utils/constants";
+import Image from "next/image";
+
+const DockImage = motion(Image);
 
 const DockItem = ({ app }: { app: App }) => {
   const variants = {
@@ -32,8 +35,9 @@ const DockItem = ({ app }: { app: App }) => {
               mass: 1,
             }}
           >
-            {/* TODO: Switch to next/image once we're storing icons in our own bucket. Might be tricky with framer motion though. */}
-            <motion.img
+            <DockImage
+              height={92}
+              width={92}
               variants={{
                 hover: {
                   width: 92,
