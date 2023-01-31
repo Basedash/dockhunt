@@ -52,9 +52,13 @@ export default function AppPage() {
             />
           )}
           <h1 className="mt-2 text-3xl font-semibold">{app.data.app.name}</h1>
-          <p className="mt-3 max-w-2xl whitespace-pre-wrap text-center leading-normal text-gray-300">
-            {app.data.app.description}
-          </p>
+          {app.data.app.description && (
+            <div className="mt-3 flex max-w-2xl flex-col gap-1 text-center leading-normal text-gray-300">
+              {app.data.app.description.split("\n").map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
+          )}
           <div className="mt-4 flex gap-4">
             {app.data.app.websiteUrl && (
               <a

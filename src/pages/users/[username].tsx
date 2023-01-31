@@ -71,7 +71,7 @@ export default function UserPage() {
             Share on Twitter
           </a>
         )}
-        <div className="flex max-w-[80rem] flex-col items-center px-6 pb-20 md:px-20">
+        <div className="flex flex-col items-center px-6 pb-20 md:px-20">
           {user.data.avatarUrl && (
             <Image
               src={user.data.avatarUrl}
@@ -82,9 +82,13 @@ export default function UserPage() {
             />
           )}
           <h1 className="mt-2 text-2xl">{user.data.name}</h1>
-          <p className="mt-3 max-w-2xl whitespace-pre-wrap text-center leading-normal text-gray-300">
-            {user.data.description}
-          </p>
+          {user.data.description && (
+            <div className="mt-3 flex max-w-2xl flex-col gap-1 text-center leading-normal text-gray-300">
+              {user.data.description.split("\n").map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
+          )}
           <div className="mt-4 flex gap-4">
             {user.data.url && (
               <a
