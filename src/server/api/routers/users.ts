@@ -10,8 +10,8 @@ export const usersRouter = createTRPCRouter({
         z.object({ username: z.string() }),
       ])
     )
-    .query(({ ctx, input }) => {
-      return ctx.prisma.user.findUnique({
+    .query(async ({ ctx, input }) => {
+      const user = await ctx.prisma.user.findUnique({
         where: { ...input },
         select: {
           username: true,
@@ -31,5 +31,6 @@ export const usersRouter = createTRPCRouter({
           },
         },
       });
+      return user;
     }),
 });

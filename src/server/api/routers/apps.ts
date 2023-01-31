@@ -24,19 +24,21 @@ export const appsRouter = createTRPCRouter({
 
       return { app, docks };
     }),
-  getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.app.findMany();
+  getAll: publicProcedure.query(async ({ ctx }) => {
+    const apps = await ctx.prisma.app.findMany();
+    return apps;
   }),
   getManyFromNames: publicProcedure
     .input(z.object({ names: z.array(z.string()) }))
-    .query(({ ctx, input }) => {
+    .query(async ({ ctx, input }) => {
       const names = input.names;
-      return ctx.prisma.app.findMany({
+      const app = await ctx.prisma.app.findMany({
         where: {
           name: {
             in: names,
           },
         },
       });
+      return app;
     }),
 });
