@@ -1,10 +1,11 @@
 import { Dock } from "components/Dock";
 import { env } from "env/client.mjs";
+import twitter from "images/twitter.svg";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { api } from "../../utils/api";
 import { useSession } from "next-auth/react";
+import { api } from "../../utils/api";
 
 export default function UserPage() {
   const router = useRouter();
@@ -60,7 +61,7 @@ export default function UserPage() {
         {sessionData?.user?.username === username && (
           <a
             className={
-              "absolute top-[65px] right-[15px] rounded-full bg-[#4999E9] px-4 py-2 hover:bg-[#428AD2] md:top-[45px]"
+              "absolute top-[70px] right-[15px] flex items-center gap-2 rounded-full bg-[#4999E9] px-4 py-2 hover:bg-[#428AD2] min-[900px]:top-[45px]"
             }
             href={`https://twitter.com/intent/tweet?text=Check%20out%20my%20dock%20on%20%40dockhuntapp%3A%0A%0A${encodeURIComponent(
               env.NEXT_PUBLIC_URL
@@ -68,7 +69,8 @@ export default function UserPage() {
             target={"_blank"}
             rel="noreferrer"
           >
-            Share on Twitter
+            <Image src={twitter} alt="Twitter" height="18" />
+            <span className="hidden sm:block">Share</span>
           </a>
         )}
         <div className="flex flex-col items-center px-6 pb-20 md:px-20">
