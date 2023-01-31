@@ -3,8 +3,13 @@ import pinnedDocks from "images/pinned.jpg";
 import Image from "next/image";
 import Link from "next/link";
 import { desktopAppDownloadLink } from "utils/constants";
+import { useSession } from "next-auth/react";
+import { api } from "../utils/api";
 
 const AddDock = () => {
+  const { data: sessionData } = useSession();
+  const user = api.users.getOne.useQuery({ id: sessionData?.user?.id ?? "" });
+
   return (
     <>
       <Head>
@@ -13,18 +18,30 @@ const AddDock = () => {
         <link rel="icon" href="/favicon.png" />
       </Head>
       <div className="flex min-h-screen max-w-[800px] flex-col items-start justify-center px-8 py-24">
-        <h1 className="mb-8 text-3xl font-semibold">Add your own dock</h1>
-        <h2 className={'text-2xl mb-4'}>Desktop app method (preferred)</h2>
+        <h1 className="mb-8 text-3xl font-semibold">
+          {!user.data?.dock ? "Add your own dock" : "Update your dock"}
+        </h1>
+        <h2 className={"mb-4 text-2xl"}>Desktop app method (preferred)</h2>
         <h3 className="mb-2 text-xl">Prerequisites</h3>
         <ul className="mb-8 list-disc pl-8 text-xl">
           <li>macOS 11+ (Big Sur and above)</li>
         </ul>
 
-        <p className="mb-2 text-xl mb-4">Download the desktop app, unzip it, and move the app into your applications directory. Once in your applications directory you will be able to run the app.</p>
+        <p className="mb-4 text-xl">
+          Download the desktop app, unzip it, and move the app into your
+          applications directory. Once in your applications directory you will
+          be able to run the app.
+        </p>
 
-        <a className="rounded-full bg-blue-700 px-4 py-2 hover:bg-blue-600 mb-8" download href={desktopAppDownloadLink}>Download desktop app</a>
+        <a
+          className="mb-8 rounded-full bg-blue-700 px-4 py-2 hover:bg-blue-600"
+          download
+          href={desktopAppDownloadLink}
+        >
+          Download desktop app
+        </a>
 
-        <h2 className={'text-2xl mb-4'}>CLI method</h2>
+        <h2 className={"mb-4 text-2xl"}>CLI method</h2>
         <h3 className="mb-2 text-xl">Prerequisites</h3>
         <ul className="mb-8 list-disc pl-8 text-xl">
           <li>macOS 11+ (Big Sur and above)</li>
@@ -40,7 +57,6 @@ const AddDock = () => {
             </a>{" "}
             installed on your computer
           </li>
-          <li>You will be asked to authenticate with Twitter</li>
         </ul>
         <p className="mb-8 text-xl">
           To add your own dock, run the following command in your{" "}
@@ -75,8 +91,7 @@ const AddDock = () => {
           </a>
         </div>
 
-        <hr className={'w-full my-8'} />
-
+        <hr className={"my-8 w-full"} />
 
         <p className="mb-8 text-xl">
           Dockhunt will only use the apps that are pinned to your dock. Apps can
