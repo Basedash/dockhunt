@@ -15,6 +15,7 @@ export function DockCard({
   return (
     <div className="flex flex-col">
       <p className="mb-2 text-sm text-gray-500">
+        {dock.user.name} &sdot;{" "}
         <a
           className="hover:underline"
           href={`https://twitter.com/${dock.user.username}`}
@@ -22,8 +23,7 @@ export function DockCard({
           rel="noreferrer"
         >
           @{dock.user.username}
-        </a>{" "}
-        &sdot; {format(dock.createdAt, "MMM d, y")}
+        </a>
       </p>
 
       <div className="relative flex justify-center gap-12">
