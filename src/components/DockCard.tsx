@@ -1,6 +1,5 @@
 import * as Tooltip from "@radix-ui/react-tooltip";
 import type { inferRouterOutputs } from "@trpc/server";
-import format from "date-fns/format";
 import Image from "next/image";
 import Link from "next/link";
 import type { AppRouter } from "server/api/root";
@@ -15,7 +14,10 @@ export function DockCard({
   return (
     <div className="flex flex-col">
       <p className="mb-2 text-sm text-gray-500">
-        {dock.user.name} &sdot;{" "}
+        <Link href={`/users/${dock.user.username}`} className="hover:underline">
+          {dock.user.name}
+        </Link>
+        <span className="mx-2">&sdot;</span>
         <a
           className="hover:underline"
           href={`https://twitter.com/${dock.user.username}`}
@@ -42,8 +44,11 @@ export function DockCard({
           </Tooltip.Trigger>
           <Tooltip.Portal>
             <Tooltip.Content sideOffset={10} className="z-20">
-              <div className="rounded-[4px] border border-[#49494B] bg-[#272728] py-[4px] px-[10px] text-xs text-white">
-                {dock.user.name}
+              <div className="max-w-xs rounded-[4px] border border-[#49494B] bg-[#272728] py-[4px] px-[10px] text-xs text-white">
+                <p className="font-bold">{dock.user.name}</p>
+                {dock.user.description && (
+                  <p className="mt-1">{dock.user.description}</p>
+                )}
               </div>
             </Tooltip.Content>
           </Tooltip.Portal>
