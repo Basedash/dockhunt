@@ -22,6 +22,12 @@ const config = {
         hostname: "pbs.twimg.com",
         pathname: "/profile_images/**",
       },
+      // Twitter default profile image
+      {
+        protocol: "https",
+        hostname: "abs.twimg.com",
+        pathname: "/sticky/**",
+      },
       // App icons in DigitalOcean bucket
       {
         protocol: "https",
