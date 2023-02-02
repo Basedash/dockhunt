@@ -44,7 +44,7 @@ export const authOptions: NextAuthOptions = {
           name: profile.data.name,
           description: profile.data.description,
           url:
-            profile.data.entities?.url.urls[0]?.expanded_url ??
+            profile.data.entities?.url?.urls[0]?.expanded_url ??
             profile.data.url,
           twitterFollowerCount: profile.data.public_metrics.followers_count,
           username: profile.data.username,
