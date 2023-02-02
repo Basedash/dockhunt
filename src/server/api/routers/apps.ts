@@ -28,6 +28,22 @@ export const appsRouter = createTRPCRouter({
     const apps = await ctx.prisma.app.findMany();
     return apps;
   }),
+  getTop: publicProcedure.query(async ({ ctx }) => {
+    const apps = await ctx.prisma.app.findMany({
+      include: {
+        _count: {
+          select: { dockItems: true },
+        },
+      },
+      orderBy: {
+        dockItems: {
+          _count: "desc",
+        },
+      },
+      take: 100,
+    });
+    return apps;
+  }),
   getManyFromNames: publicProcedure
     .input(z.object({ names: z.array(z.string()) }))
     .query(async ({ ctx, input }) => {

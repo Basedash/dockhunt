@@ -34,6 +34,9 @@ export const MenuBar = () => {
         <Link className="hidden sm:block" href="/apps/Basedash">
           Made by Basedash
         </Link>
+        <Link className="hidden sm:block" href="/apps">
+          Top apps
+        </Link>
         <Link className="hidden sm:block" href="/add-dock">
           {user.data?.dock ? "Update your dock" : "Add your dock"}
         </Link>
