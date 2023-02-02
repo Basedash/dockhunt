@@ -19,10 +19,14 @@ export const appsRouter = createTRPCRouter({
             orderBy: { position: "asc" },
           },
         },
-        orderBy: { createdAt: "desc" },
+        orderBy: [{ featured: "desc" }, { createdAt: "desc" }],
+        take: 20,
+      });
+      const dockCount = await ctx.prisma.dock.count({
+        where: { dockItems: { some: { app: { name: input.name } } } },
       });
 
-      return { app, docks };
+      return { app, docks, dockCount };
     }),
   getAll: publicProcedure.query(async ({ ctx }) => {
     const apps = await ctx.prisma.app.findMany();
