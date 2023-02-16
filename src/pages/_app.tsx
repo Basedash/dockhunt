@@ -18,8 +18,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <SessionProvider session={session}>
       <Tooltip.Provider delayDuration={0}>
         <Script
-          src={"https://perfect-lights.stateofdb.com/script.js"}
-          data-site="HPHFZNLN"
+          src={"https://titans-cheeky.dockhunt.com/script.js"}
+          data-site="ZBAJAOGI"
         />
         <Head>
           <link rel="icon" href="/favicon.png" />
