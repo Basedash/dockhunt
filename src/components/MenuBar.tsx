@@ -31,24 +31,23 @@ export const MenuBar = () => {
           <Image src={dockhunt} alt="Dockhunt" height="16" />
           Dockhunt
         </Link>
-        <Link className="hidden sm:block" href="/apps/Basedash">
-          Made by Basedash
-        </Link>
         <Link className="hidden sm:block" href="/apps">
           Top apps
         </Link>
         <Link className="hidden sm:block" href="/add-dock">
           {user.data?.dock ? "Update your dock" : "Add your dock"}
         </Link>
-        <button
-          onClick={
-            sessionData
-              ? () => void signOut({ redirect: false })
-              : () => void signIn("twitter")
-          }
+        <Link className="hidden sm:block" href="/apps/Basedash">
+          Made by Basedash
+        </Link>
+        <Link
+          className="hidden sm:block"
+          href="https://basedash.notion.site/Senior-Full-Stack-Engineer-TypeScript-React-Node-js-f1bf9a04ba72410b9f942e97df1ef91b"
+          target="_blank"
+          rel="noreferrer"
         >
-          {sessionData ? "Log out" : "Log in"}
-        </button>
+          We're hiring
+        </Link>
       </div>
 
       <div className="flex items-center gap-4">
@@ -85,6 +84,15 @@ export const MenuBar = () => {
             {sessionData.user.name}
           </Link>
         )}
+        <button
+          onClick={
+            sessionData
+              ? () => void signOut({ redirect: false })
+              : () => void signIn("twitter")
+          }
+        >
+          {sessionData ? "Log out" : "Log in"}
+        </button>
       </div>
     </div>
   );
