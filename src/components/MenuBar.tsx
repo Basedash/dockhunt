@@ -40,14 +40,6 @@ export const MenuBar = () => {
         <Link className="hidden sm:block" href="/apps/Basedash">
           Made by Basedash
         </Link>
-        <Link
-          className="hidden sm:block"
-          href="https://basedash.notion.site/Senior-Full-Stack-Engineer-TypeScript-React-Node-js-f1bf9a04ba72410b9f942e97df1ef91b"
-          target="_blank"
-          rel="noreferrer"
-        >
-          We're hiring
-        </Link>
       </div>
 
       <div className="flex items-center gap-4">
