@@ -62,9 +62,21 @@ const AddDock = () => {
           To add your own dock, run the following command in your{" "}
           <Link href="/apps/Terminal">terminal</Link>:
         </p>
-        <code className="mb-8 w-full rounded border bg-black p-4">
-          npx dockhunt
-        </code>
+        <div className="flex mb-8 items-center">
+          <code className="rounded border bg-black p-4">
+            npx dockhunt
+          </code>
+          <button
+            className="ml-4 rounded-full bg-blue-700 px-4 py-2 text-white hover:bg-blue-600"
+            onClick={() => {
+              navigator.clipboard.writeText('npx dockhunt').then(() => {
+                alert('Command copied!');
+              });
+            }}
+          >
+            Copy Command
+          </button>
+        </div>
         <p className="mb-2 text-xl">The command will:</p>
         <ol className="mb-8 list-decimal pl-8 text-xl">
           <li>Find the apps in your dock</li>
@@ -95,7 +107,7 @@ const AddDock = () => {
 
         <p className="mb-8 text-xl">
           Dockhunt will only use the apps that are pinned to your dock. Apps can
-          be pinned by right-clicking and selecting Options &gt; Keep in Dock.
+          be pinned by right-clicking and selecting Options > Keep in Dock.
           Apps that are not pinned will be ignored.
         </p>
         <Image
