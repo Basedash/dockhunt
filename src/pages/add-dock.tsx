@@ -10,6 +10,14 @@ const AddDock = () => {
   const { data: sessionData } = useSession();
   const user = api.users.getOne.useQuery({ id: sessionData?.user?.id ?? "" });
 
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText('npx dockhunt').then(() => {
+      alert('Command copied to clipboard!');
+    }, (err) => {
+      console.error('Could not copy text: ', err);
+    });
+  };
+
   return (
     <>
       <Head>
@@ -46,7 +54,7 @@ const AddDock = () => {
         <ul className="mb-8 list-disc pl-8 text-xl">
           <li>macOS 11+ (Big Sur and above)</li>
           <li>
-            You must have{" "}
+            You must have
             <a
               href="https://nodejs.org"
               target="_blank"
@@ -54,17 +62,22 @@ const AddDock = () => {
               className="text-blue-400 hover:underline"
             >
               Node.js
-            </a>{" "}
+            </a>
             installed on your computer
           </li>
         </ul>
         <p className="mb-8 text-xl">
-          To add your own dock, run the following command in your{" "}
+          To add your own dock, run the following command in your
           <Link href="/apps/Terminal">terminal</Link>:
         </p>
-        <code className="mb-8 w-full rounded border bg-black p-4">
-          npx dockhunt
-        </code>
+        <div className="flex items-center gap-2 mb-8">
+          <code className="rounded border bg-black p-4">
+            npx dockhunt
+          </code>
+          <button onClick={copyToClipboard} className="rounded bg-blue-700 px-4 py-2 text-white hover:bg-blue-600">
+            Copy
+          </button>
+        </div>
         <p className="mb-2 text-xl">The command will:</p>
         <ol className="mb-8 list-decimal pl-8 text-xl">
           <li>Find the apps in your dock</li>
