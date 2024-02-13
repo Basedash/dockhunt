@@ -10,6 +10,14 @@ const AddDock = () => {
   const { data: sessionData } = useSession();
   const user = api.users.getOne.useQuery({ id: sessionData?.user?.id ?? "" });
 
+  const copyCommandToClipboard = () => {
+    navigator.clipboard.writeText('npx dockhunt').then(() => {
+      alert('Command copied to clipboard!');
+    }, (err) => {
+      console.error('Could not copy command: ', err);
+    });
+  };
+
   return (
     <>
       <Head>
@@ -62,9 +70,17 @@ const AddDock = () => {
           To add your own dock, run the following command in your{" "}
           <Link href="/apps/Terminal">terminal</Link>:
         </p>
-        <code className="mb-8 w-full rounded border bg-black p-4">
-          npx dockhunt
-        </code>
+        <div className="flex items-center mb-8">
+          <code className="rounded border bg-black p-4 mr-4">
+            npx dockhunt
+          </code>
+          <button
+            className="rounded-full bg-blue-700 px-4 py-2 hover:bg-blue-600 text-white"
+            onClick={copyCommandToClipboard}
+          >
+            Copy
+          </button>
+        </div>
         <p className="mb-2 text-xl">The command will:</p>
         <ol className="mb-8 list-decimal pl-8 text-xl">
           <li>Find the apps in your dock</li>
