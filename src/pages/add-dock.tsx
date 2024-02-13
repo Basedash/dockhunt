@@ -6,6 +6,16 @@ import { desktopAppDownloadLink } from "utils/constants";
 import { useSession } from "next-auth/react";
 import { api } from "../utils/api";
 
+const copyToClipboard = async (text) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    // Optional: Display feedback to the user
+    alert('Command copied to clipboard!');
+  } catch (err) {
+    console.error('Failed to copy: ', err);
+  }
+};
+
 const AddDock = () => {
   const { data: sessionData } = useSession();
   const user = api.users.getOne.useQuery({ id: sessionData?.user?.id ?? "" });
@@ -62,9 +72,17 @@ const AddDock = () => {
           To add your own dock, run the following command in your{" "}
           <Link href="/apps/Terminal">terminal</Link>:
         </p>
-        <code className="mb-8 w-full rounded border bg-black p-4">
-          npx dockhunt
-        </code>
+        <div className="flex items-center">
+          <code className="mb-8 w-full rounded border bg-black p-4">
+            npx dockhunt
+          </code>
+          <button
+            onClick={() => copyToClipboard('npx dockhunt')}
+            className="ml-2 rounded bg-blue-500 px-2 py-1 text-white hover:bg-blue-400"
+          >
+            Copy
+          </button>
+        </div>
         <p className="mb-2 text-xl">The command will:</p>
         <ol className="mb-8 list-decimal pl-8 text-xl">
           <li>Find the apps in your dock</li>
